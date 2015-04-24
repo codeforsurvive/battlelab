@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ApplicationSetting>
+  <Property name="dbconfig" value="D:\eProc\dbconfig.xml" />
+  <Property name="user" value="D:\eProc\user.xml" />
+</ApplicationSetting>

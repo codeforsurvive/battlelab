@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DbConfig>
+  <Property name="host" value="25.9.196.74" />
+  <Property name="port" value="1433" />
+  <Property name="username" value="tpswebservice" />
+  <Property name="password" value="tps123!" />
+  <Property name="provider" value="SQLServer" />
+  <Property name="database" value="tpsdb_dev" />
+</DbConfig>
