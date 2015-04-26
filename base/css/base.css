@@ -1,0 +1,42 @@
+/* 
+    Document   : base
+    Created on : Aug 17, 2012, 9:44:47 PM
+    Author     : Rohmad
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@font-face {
+    font-family: "Schoolbell";
+    src: url(../fonts/Schoolbell.ttf) format("truetype");
+}
+@font-face {
+    font-family: "SketchRegular";
+    src: url(../fonts/CabinSketch-Regular.ttf) format("truetype");
+}
+@font-face {
+    font-family: "SketchBold";
+    src: url(../fonts/CabinSketch-Bold.ttf) format("truetype");
+}
+
+body
+{
+    margin:0px;
+    font-family:"SchoolBell";
+}
+
+.menu{
+    /*background:#999;*/
+    text-align:center;
+    padding-bottom: 0px;
+    padding-top: 10px;
+    width: 150px;
+}
+
+
+.separator
+{
+    width: 100%;
+    height: 25px;
+}
+

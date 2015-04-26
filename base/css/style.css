@@ -1,0 +1,475 @@
+@charset "utf-8";
+/* CSS Document */
+
+body
+{
+    background: url(../images/bg.png) no-repeat;
+    background-attachment: fixed;
+    margin:0px;
+    font-family:"Segoe UI";
+}
+
+.tb{
+    background:#FFF;
+}
+
+.border{
+    box-shadow:0px 0px 10px #FFF;
+    -moz-box-shadow:0px 0px 10px #FFF;
+    -webkit-box-shadow:0px 0px 10px #FFF;
+    -o-box-shadow:0px 0px 10px #FFF;
+}
+
+.menu{
+    /*background:#999;*/
+    text-align:center;
+    padding-bottom: 0px;
+    padding-top: 10px;
+    width: 150px;
+}
+
+.titlemenu{
+    background:#999;
+    text-align:center;
+    width:200px;
+    border-radius:10px 0px 0px 4px;
+    transition:width 0.2s;
+    -moz-transition:width 0.2s;
+    -webkit-transition:width 0.2s;
+    -o-transition:width 0.2s;
+}
+
+.titlemenu:hover{
+    width:250px;
+}
+
+a{
+    text-decoration:none;
+    color: #FFF;
+}
+
+.menu-container{
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    background: #699613;
+
+}
+.menu-border{
+    position: fixed;
+    width: 100%;
+    height: 10px;
+    background: darkgreen;
+    top: 50px;
+
+}
+#main{
+    width: 100%;
+    padding: 0px;
+    text-align: center;
+}
+.menubuton{
+    top: 10px;
+    text-align: center;
+    border-radius:0px 0px 5px 5px;
+    background: #699613;
+    color:#FFF;
+    font-size:18px;
+    font-weight: bold;
+    transition:background 0.5s,box-shadow 0.3s;
+    -moz-transition:background 0.5s,-moz-box-shadow 0.3s;
+    height: 40px;
+    width: 150px;
+    cursor: pointer;
+    vertical-align: bottom;
+    border-collapse: collapse;
+}
+.logo{
+
+    height: 40px;
+    padding: 0px;
+}
+
+.menubuton:hover{
+    background: #87AB19;
+    box-shadow:0px 0px 5px greenyellow;
+    -moz-box-shadow:0px 0px 5px 3px greenyellow;
+    -webkit-box-shadow:0px 0px 5px 3px greenyellow;
+}
+#maskot{
+
+}
+#footer{
+    position: fixed;
+    background: #699613;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    bottom: 0;
+    padding: 10px;
+
+}
+#content{
+    width: 800px;
+    padding: 0px;
+
+}
+#side{
+    width: 300px;
+    padding: 0px;
+
+}
+#widget{
+    -moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
+}
+
+.post
+{
+    padding: 5px;
+    border: solid 1px #699613;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    
+}
+
+.post-body
+{
+    padding: 10px;
+    font-size: 12px;
+    text-align: justify;
+    text-decoration: none;
+    font-style: normal;
+}
+
+.content-background{
+    text-align: left;
+    width: 100%;
+    -moz-border-radius: 16px;
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
+    color: darkgreen;
+    padding: 10px;
+}
+.head-style
+{
+    color:#699613;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.horz-line
+{
+    background: #699613;
+    width: 100%;
+    height: 2px;
+    padding: 0;
+}
+
+.vert-line
+{
+    background: #699613;
+    height: 100%;
+    width: 2px;
+    padding: 0;
+    
+}
+.title-style
+{
+    background: darkgreen;
+    color: white;
+    font-size: 20px;
+    font-weight: normal;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.content-border{
+    width: 100%;
+    height: 10px;
+    background: darkgreen;
+}
+.atas{
+    background:#333;
+    width:100%;
+    height:120px;
+    text-align:left;
+    padding-left:10px;
+    color:#FFF;
+    padding-left:250px;
+    z-index:100;
+}
+
+.log{
+    position:fixed;
+    top:-80px;
+    transition:top 0.4s;
+    -moz-transition:top 0.4s;
+    -webkit-transition:top 0.4s;
+    -o-transition:top 0.4s;
+}
+.log:hover{
+    top:0px;
+}
+
+
+#slideshow #slideshowWindow {
+    width:930px;
+    height:300px;
+    margin:0;
+    padding:0;
+    position:relative;
+    overflow:hidden;
+}
+
+#slideshow #slideshowWindow .slide {
+    margin:0;
+    padding:0;
+    width:930px;
+    height:300px;
+    position:relative;
+}
+
+#slideshow #slideshowWindow .slide .slideText {
+    position:absolute;
+    top:130px;
+    left:0px;
+    width:100%;
+    height:130px;
+    background-image:url(img/transparant.png);
+    background-repeat:repeat;
+    margin:0;
+    padding:0;
+    color:#ffffff;
+    font-family:"Segoe UI Symbol";
+}
+
+#slideshow #slideshowWindow .slide .slideText a:link,
+#slideshow #slideshowWindow .slide .slideText a:visited {
+    color:#ffffff;
+    text-decoration:none;
+}
+
+#slideshow #slideshowWindow .slide .slideText h2,
+#slideshow #slideshowWindow .slide .slideText p {
+    margin:10px 0 0 10px;
+    padding:0;
+}
+
+.tbcontent{
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border: 1px solid darkgreen;
+    background: #F30;
+}
+.tbhead{
+    background:white;
+    font-size:12px;
+    color: #4F7119;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border: solid 1px darkgreen;
+}
+
+td.content{
+    padding:5px;
+    border-collapse: collapse;
+    border: 1px solid darkgreen;
+}
+
+.tbbody{
+    background:#CCC;
+    padding: 5px;
+    font-size:12px;
+    border: 1px solid darkgreen;
+}
+
+.tbbody:hover{
+    background:#999;
+}
+
+ul.pagination{
+    margin:0px;
+    padding:0px;
+    height:100%;
+    overflow:hidden;
+    font:12px 'Segoe UI';
+    list-style-type:none;
+}
+
+ul.pagination li.details{
+    padding:7px 10px 7px 10px;
+    font-size:14px;
+}
+
+ul.pagination li.dot{padding: 3px 0;}
+
+ul.pagination li{
+    float:left;
+    margin:0px;
+    padding:0px;
+    margin-left:5px;
+}
+
+ul.pagination li:first-child{
+    margin-left:0px;
+}
+
+ul.pagination li a{
+    color:black;
+    display:block;
+    text-decoration:none;
+    padding:7px 10px 7px 10px;
+}
+
+ul.pagination li a img{
+    border:none;
+}
+ul.pagination li.details{
+    color:#699613;
+}
+
+ul.pagination li a
+{
+    border-radius:3px; 
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    padding:6px 9px 6px 9px;
+}
+
+ul.pagination li a
+{
+    color: #fff;
+    background:#699613;
+    background:-moz-linear-gradient(top,#87AB19,#699613);
+    background:-webkit-gradient(linear,0 0,0 100%,from(#87AB19),to(#699613));  
+}  
+
+ul.pagination li a:hover,
+ul.pagination li a.current
+{
+    color:#4F7119;
+    background:#E7F2C7;
+}
+
+.label
+{
+    font-size: 10px;
+    font-weight: bold;
+    color: green;
+    text-align: left;
+}
+
+input, select, option
+{
+    font-size: 10px;
+}
+
+.separator
+{
+    width: 100%;
+    height: 50px;
+}
+
+.failed
+{
+    border: 2px solid red;
+    color: red;
+    font-size: 12px;
+    width: 300px;
+    background: silver;
+    padding: 25px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+
+}
+
+.succeed
+{
+    border: 2px solid green;
+    color: green;
+    font-size: 12px;
+    width: 300px;
+    background: silver;
+    padding: 25px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+
+}
+.title
+{
+    font-size: 20px;
+    font-weight: bold;
+    color: orangered;
+}
+
+.form-container
+{
+    background: #E7F2C7;
+    padding: 10px;
+    border: solid 2px darkgreen;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.button
+{
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 10px;
+    color: white;
+    background: darkgreen;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+input.text
+{
+    color: green;
+    font-size: 12px;
+    border: 1px solid green;
+}
+
+.product
+{
+    background: #E7F2C7;
+    padding: 10px;
+    border: solid 2px darkgreen;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    width: 170px;
+    height: 220px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.product-text
+{
+    background: #E7F2C7;
+    padding: 10px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    width: 170px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.comment-div
+{
+    width: 400px;
+    padding: 10px;
+    background: #E7F2C7;
+    color: green;
+}
+
