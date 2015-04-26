@@ -1,0 +1,28 @@
+
+
+		ul.tabs{
+			margin: 0px;
+		}
+		ul.tabs li{
+			background: #A9F5E1;
+			color: #222;
+			display: inline-block;
+			padding: 10px 15px;
+			cursor: pointer;
+		}
+
+		ul.tabs li.current{
+			background: #6CC;
+			color: #222;
+		}
+
+		.tab-content{
+			display: none;
+			background: #E0F8EC;
+			
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
