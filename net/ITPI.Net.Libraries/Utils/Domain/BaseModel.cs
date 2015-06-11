@@ -76,14 +76,16 @@ namespace ITPI.Net.Utils.Domain
                     dataProvider.OpenConnection(Configuration.ConfigurationSetting.Instance.Authenticaton);
                     affected = dataProvider.ExecuteNonQuery(this.SqlInsert);
                     Logger.LogToConsole("Operation success!", "Insert command completed!");
-                    Logger.LogToDefaultFile("Operation success!", "Insert command completed!");
+                    Logger.LogToDefaultFile("Debug: ", String.Format("Sql Query: {0}", this.SqlInsert));
+                    Logger.LogToDefaultFile("Operation success!", String.Format("Insert command at table {0} completed!", tableName));
                 }
                 else
                 {
                     dataProvider.OpenConnection(Configuration.ConfigurationSetting.Instance.Authenticaton);
                     affected = dataProvider.ExecuteNonQuery(this.SqlUpdate);
                     Logger.LogToConsole("Operation success!", "Update command completed!");
-                    Logger.LogToDefaultFile("Operation success!", "Update command completed!");
+                    Logger.LogToDefaultFile("Debug: ", String.Format("Sql Query: {0}", this.SqlUpdate));
+                    Logger.LogToDefaultFile("Operation success!", String.Format("Update command at table {0} completed!", tableName));
                 }
             }
             catch (Exception ex)
@@ -110,11 +112,26 @@ namespace ITPI.Net.Utils.Domain
                 Logger.LogToConsole(ex);
                 Logger.LogToDefaultFile(ex);
             }
-
-
-
             return ds;
         }
+
+        public virtual object Select()
+        {
+            throw new NotImplementedException("Not supported, has not been implemented yet!");
+
+        }
+
+        public virtual Object Select(String id)
+        {
+            throw new NotImplementedException("Not supported, has not been implemented yet!");
+        }
+
+        public virtual Object Select(Dictionary<String, String> criteria)
+        {
+            throw new NotImplementedException("Not supported, has not been implemented yet!");
+        }
+
+        
 
         public System.Data.DataSet Get(String id)
         {
@@ -136,12 +153,36 @@ namespace ITPI.Net.Utils.Domain
             return ds;
         }
 
+        public System.Data.DataSet Find(List<String[]> criteria)
+        {
+            Dictionary<String, String> criteriaList = new Dictionary<string, string>();
+            foreach (String[] item in criteria)
+            {
+                criteriaList.Add(item[0], item[1]);
+            }
+
+            return Get(criteriaList);
+        }
+
         public System.Data.DataSet Get(Dictionary<String, String> criteria)
         {
             System.Data.DataSet ds = new System.Data.DataSet("ResultSet");
             try
             {
-                String sql = "";
+                String criteriaString = "";
+                int count = 0;
+                StringBuilder sb = new StringBuilder();
+                foreach (var pair in criteria)
+                { 
+                    
+                    sb.Append(String.Format("{0} = '{1}'", pair.Key, pair.Value));
+                    if (count++ < criteria.Count - 1)
+                        sb.Append(" and ");
+                }
+                criteriaString = sb.ToString();
+                String sql = String.Format("select top 1000 * from {0} where {1}", tableName, criteriaString);
+                dataProvider.OpenConnection(Configuration.ConfigurationSetting.Instance.Authenticaton);
+                ds = dataProvider.ExecuteQuery(sql);
 
             }
             catch (Exception ex)
@@ -329,6 +370,11 @@ namespace ITPI.Net.Utils.Domain
         public virtual String GetId()
         {
             return fields[columnsMap[IdColumn]].ToString();
+        }
+
+        public String ColumnName(Enum columnIdentifier)
+        {
+            return columnsMap[columnIdentifier];
         }
 
 

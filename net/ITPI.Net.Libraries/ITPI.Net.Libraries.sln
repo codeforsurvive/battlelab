@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppClient", "Console
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaximoClient", "MaximoClient\MaximoClient.csproj", "{64755983-AF10-4D31-9124-57A66525B7ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{99AD35BE-9282-4C5F-AFC2-26341AEE6BB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{64755983-AF10-4D31-9124-57A66525B7ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64755983-AF10-4D31-9124-57A66525B7ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64755983-AF10-4D31-9124-57A66525B7ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99AD35BE-9282-4C5F-AFC2-26341AEE6BB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99AD35BE-9282-4C5F-AFC2-26341AEE6BB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99AD35BE-9282-4C5F-AFC2-26341AEE6BB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99AD35BE-9282-4C5F-AFC2-26341AEE6BB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

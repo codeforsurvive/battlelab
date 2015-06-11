@@ -13,7 +13,8 @@ namespace ITPI.Net.Utils.Domain
             Id,
             Name,
             Active,
-            Description
+            Description,
+            AxId
         };
 
 
@@ -24,11 +25,12 @@ namespace ITPI.Net.Utils.Domain
             tableName = "tmp_departemen2";
             autoIncrement = true;
             IdColumn = Columns.Id;
+            Id = 0;
         }
 
         protected override void GenerateColumns()
         {
-            String[] columns = new String[] { "departemen_id", "departemen_nama", "flag_active", "keterangan" };
+            String[] columns = new String[] { "departemen_id", "departemen_nama", "flag_active", "keterangan", "departemen_ax_id" };
             int count = 0;
             foreach (Department.Columns col in Enum.GetValues(typeof(Department.Columns)))
             {
@@ -46,6 +48,23 @@ namespace ITPI.Net.Utils.Domain
             // Do nothing
         }
 
+        public override bool Exist()
+        {
+            Dictionary<String, String> criteria = new Dictionary<string, string>();
+            criteria.Add("departemen_ax_id", AxId);
+            System.Data.DataSet ds = Get(criteria);
+            bool state = !(ds.Tables.Count <= 0 || ds.Tables[0].Rows.Count <= 0);
+            if (state)
+            {
+                Department temp = Department.ParseFirst(ds);
+                Id = temp.Id;
+                Name = String.IsNullOrEmpty(Name) ? temp.Name : Name;
+                Description = String.IsNullOrEmpty(Description) ? temp.Description : Description;
+                AxId = String.IsNullOrEmpty(AxId) ? temp.AxId : AxId;
+            }
+            return state;
+        }
+
         public static List<Department> ParseXml(String xml, String rootElement)
         {
             XElement root = XElement.Parse(xml);
@@ -57,7 +76,8 @@ namespace ITPI.Net.Utils.Domain
                     Id = Convert.ToInt32((String)x.Element("departemen_id") ?? "0"),
                     Name = (String)x.Element("departemen_nama") ?? String.Empty,
                     Active = ((String)x.Element("flag_active") ?? "0") == "true",
-                    Description = (String)x.Element("keterangan") ?? String.Empty
+                    Description = (String)x.Element("keterangan") ?? String.Empty,
+                    AxId = (String)x.Element("departemen_ax_id") ?? String.Empty
                 }).ToList();
             return result;
 
@@ -104,7 +124,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Department.Columns.Name]].ToString();
+                return (fields[columnsMap[Department.Columns.Name]] == null) ? String.Empty : fields[columnsMap[Department.Columns.Name]].ToString();
             }
         }
 
@@ -128,7 +148,19 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Department.Columns.Description]].ToString();
+                return (fields[columnsMap[Department.Columns.Description]] == null) ? String.Empty : fields[columnsMap[Department.Columns.Description]].ToString();
+            }
+        }
+
+        public String AxId
+        {
+            set
+            {
+                fields[columnsMap[Department.Columns.AxId]] = value;
+            }
+            get
+            {
+                return (fields[columnsMap[Department.Columns.AxId]] == null) ? String.Empty :  fields[columnsMap[Department.Columns.AxId]].ToString();
             }
         }
 

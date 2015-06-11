@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="30883893-45dd-4fbd-b5e3-c1ef7e0c11eb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://tpsdmax:8101/DynamicsAx/Services/EprocAxMaximoServiceGroup" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="EprocAxMaximoServiceGroup.xsd" MetadataType="Schema" ID="ac6b8821-73de-4b8e-b247-a3e45dfeab19" SourceId="1" SourceUrl="http://tpsdmax:8101/DynamicsAx/Services/EprocAxMaximoServiceGroup?xsd=xsd2" />
+    <MetadataFile FileName="EprocAxMaximoServiceGroup1.xsd" MetadataType="Schema" ID="45e6281a-d501-4195-a2bd-4bb6faa7209a" SourceId="1" SourceUrl="http://tpsdmax:8101/DynamicsAx/Services/EprocAxMaximoServiceGroup?xsd=xsd3" />
+    <MetadataFile FileName="EprocAxMaximoServiceGroup2.xsd" MetadataType="Schema" ID="4d5b4880-e3b1-44c4-8dc2-86b1f2ccbcb8" SourceId="1" SourceUrl="http://tpsdmax:8101/DynamicsAx/Services/EprocAxMaximoServiceGroup?xsd=xsd0" />
+    <MetadataFile FileName="EprocAxMaximoServiceGroup3.xsd" MetadataType="Schema" ID="091a4390-8188-4979-915f-7667ab838335" SourceId="1" SourceUrl="http://tpsdmax:8101/DynamicsAx/Services/EprocAxMaximoServiceGroup?xsd=xsd1" />
+    <MetadataFile FileName="EprocAxMaximoServiceGroup4.xsd" MetadataType="Schema" ID="743c5892-ce49-4dcd-9249-5ce0199e3092" SourceId="1" SourceUrl="http://tpsdmax:8101/DynamicsAx/Services/EprocAxMaximoServiceGroup?xsd=xsd4" />
+    <MetadataFile FileName="EprocAxMaximoServiceGroup5.xsd" MetadataType="Schema" ID="82e14cd5-850d-48c7-a8b1-01141b64da58" SourceId="1" SourceUrl="http://tpsdmax:8101/DynamicsAx/Services/EprocAxMaximoServiceGroup?xsd=xsd5" />
+    <MetadataFile FileName="EprocAxMaximoServiceGroup.wsdl" MetadataType="Wsdl" ID="42a48a0a-d896-4852-91db-f0fa37f5fb71" SourceId="1" SourceUrl="http://tpsdmax:8101/DynamicsAx/Services/EprocAxMaximoServiceGroup" />
+    <MetadataFile FileName="EprocAxMaximoServiceGroup1.wsdl" MetadataType="Wsdl" ID="8c9c489e-0eef-4035-b6e0-0eaaba0d4fa2" SourceId="1" SourceUrl="http://tpsdmax:8101/DynamicsAx/Services/EprocAxMaximoServiceGroup?wsdl=wsdl0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

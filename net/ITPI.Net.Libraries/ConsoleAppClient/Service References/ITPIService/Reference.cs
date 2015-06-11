@@ -19,6 +19,18 @@ namespace ConsoleAppClient.ITPIService {
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         string Message(string request);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://localhost:8888/Services/ITPI/Service1.asmx/GetPrInfo", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string GetPrInfo(ConsoleAppClient.ITPIService.PrEproc domain);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://localhost:8888/Services/ITPI/Service1.asmx/GetPrLineInfo", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string GetPrLineInfo(ConsoleAppClient.ITPIService.PrLineEproc domain);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://localhost:8888/Services/ITPI/Service1.asmx/GetPrSubtaskInfo", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string GetPrSubtaskInfo(ConsoleAppClient.ITPIService.PrSubTask domain);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://localhost:8888/Services/ITPI/Service1.asmx/InsertDepartment", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         string InsertDepartment(ConsoleAppClient.ITPIService.Department departemen);
@@ -47,9 +59,26 @@ namespace ConsoleAppClient.ITPIService {
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         string InsertPrLine(ConsoleAppClient.ITPIService.PurchaseRequisitionLine prl);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://localhost:8888/Services/ITPI/Service1.asmx/InsertPrDocument", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string InsertPrDocument(ConsoleAppClient.ITPIService.PrDocument prDoc);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://localhost:8888/Services/ITPI/Service1.asmx/Get", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         string Get(ConsoleAppClient.ITPIService.BaseModel model);
+        
+        // CODEGEN: Parameter 'criteria' requires additional schema information that cannot be captured using the parameter mode. The specific attribute is 'System.Xml.Serialization.XmlArrayItemAttribute'.
+        [System.ServiceModel.OperationContractAttribute(Action="http://localhost:8888/Services/ITPI/Service1.asmx/Find", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        ConsoleAppClient.ITPIService.FindResponse Find(ConsoleAppClient.ITPIService.FindRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://localhost:8888/Services/ITPI/Service1.asmx/IsPrApproved", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool IsPrApproved(string prId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://localhost:8888/Services/ITPI/Service1.asmx/CreatePO", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        string CreatePO(string jsonParameters);
     }
     
     /// <remarks/>
@@ -58,255 +87,11 @@ namespace ConsoleAppClient.ITPIService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx")]
-    public partial class Department : BaseModel {
-        
-        private int idField;
-        
-        private string nameField;
-        
-        private bool activeField;
-        
-        private string descriptionField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-                this.RaisePropertyChanged("Id");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-                this.RaisePropertyChanged("Name");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-                this.RaisePropertyChanged("Active");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public string Description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
-                this.RaisePropertyChanged("Description");
-            }
-        }
+    public partial class PrEproc : PurchaseRequisition {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PurchaseRequisitionLine))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PurchaseRequisition))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Province))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(City))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Vendor))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Roles))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Employee))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx")]
-    public partial class BaseModel : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx")]
-    public partial class PurchaseRequisitionLine : BaseModel {
-        
-        private int idField;
-        
-        private int numberField;
-        
-        private string descriptionField;
-        
-        private int quantityField;
-        
-        private string unitField;
-        
-        private double unitCostField;
-        
-        private double lineCostField;
-        
-        private double taxField;
-        
-        private bool activeField;
-        
-        private PurchaseRequisition prField;
-        
-        private int lineNumberField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-                this.RaisePropertyChanged("Id");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int Number {
-            get {
-                return this.numberField;
-            }
-            set {
-                this.numberField = value;
-                this.RaisePropertyChanged("Number");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string Description {
-            get {
-                return this.descriptionField;
-            }
-            set {
-                this.descriptionField = value;
-                this.RaisePropertyChanged("Description");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
-        public int Quantity {
-            get {
-                return this.quantityField;
-            }
-            set {
-                this.quantityField = value;
-                this.RaisePropertyChanged("Quantity");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
-        public string Unit {
-            get {
-                return this.unitField;
-            }
-            set {
-                this.unitField = value;
-                this.RaisePropertyChanged("Unit");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
-        public double UnitCost {
-            get {
-                return this.unitCostField;
-            }
-            set {
-                this.unitCostField = value;
-                this.RaisePropertyChanged("UnitCost");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
-        public double LineCost {
-            get {
-                return this.lineCostField;
-            }
-            set {
-                this.lineCostField = value;
-                this.RaisePropertyChanged("LineCost");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
-        public double Tax {
-            get {
-                return this.taxField;
-            }
-            set {
-                this.taxField = value;
-                this.RaisePropertyChanged("Tax");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
-        public bool Active {
-            get {
-                return this.activeField;
-            }
-            set {
-                this.activeField = value;
-                this.RaisePropertyChanged("Active");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
-        public PurchaseRequisition PR {
-            get {
-                return this.prField;
-            }
-            set {
-                this.prField = value;
-                this.RaisePropertyChanged("PR");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
-        public int LineNumber {
-            get {
-                return this.lineNumberField;
-            }
-            set {
-                this.lineNumberField = value;
-                this.RaisePropertyChanged("LineNumber");
-            }
-        }
-    }
-    
-    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PrEproc))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -316,13 +101,15 @@ namespace ConsoleAppClient.ITPIService {
         
         private int idField;
         
-        private int codeField;
+        private string codeField;
         
         private string nameField;
         
         private bool confirmedField;
         
         private bool createdField;
+        
+        private string documentUrlField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -338,7 +125,7 @@ namespace ConsoleAppClient.ITPIService {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public int Code {
+        public string Code {
             get {
                 return this.codeField;
             }
@@ -381,6 +168,113 @@ namespace ConsoleAppClient.ITPIService {
             set {
                 this.createdField = value;
                 this.RaisePropertyChanged("Created");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public string DocumentUrl {
+            get {
+                return this.documentUrlField;
+            }
+            set {
+                this.documentUrlField = value;
+                this.RaisePropertyChanged("DocumentUrl");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PrDocument))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Province))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(City))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Vendor))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Roles))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Employee))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PrSubTask))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PurchaseRequisitionLine))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PrLineEproc))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PurchaseRequisition))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PrEproc))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx")]
+    public partial class BaseModel : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx")]
+    public partial class PrDocument : BaseModel {
+        
+        private int idField;
+        
+        private string codeField;
+        
+        private string urlDocumentField;
+        
+        private PurchaseRequisition prField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+                this.RaisePropertyChanged("Id");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string Code {
+            get {
+                return this.codeField;
+            }
+            set {
+                this.codeField = value;
+                this.RaisePropertyChanged("Code");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string UrlDocument {
+            get {
+                return this.urlDocumentField;
+            }
+            set {
+                this.urlDocumentField = value;
+                this.RaisePropertyChanged("UrlDocument");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public PurchaseRequisition PR {
+            get {
+                return this.prField;
+            }
+            set {
+                this.prField = value;
+                this.RaisePropertyChanged("PR");
             }
         }
     }
@@ -506,6 +400,10 @@ namespace ConsoleAppClient.ITPIService {
         private string bankAccountNameField;
         
         private string bankAccountNumberField;
+        
+        private string axIdField;
+        
+        private bool onHoldField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Order=0)]
@@ -660,6 +558,30 @@ namespace ConsoleAppClient.ITPIService {
             set {
                 this.bankAccountNumberField = value;
                 this.RaisePropertyChanged("BankAccountNumber");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=13)]
+        public string AxId {
+            get {
+                return this.axIdField;
+            }
+            set {
+                this.axIdField = value;
+                this.RaisePropertyChanged("AxId");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=14)]
+        public bool OnHold {
+            get {
+                return this.onHoldField;
+            }
+            set {
+                this.onHoldField = value;
+                this.RaisePropertyChanged("OnHold");
             }
         }
     }
@@ -962,6 +884,377 @@ namespace ConsoleAppClient.ITPIService {
         }
     }
     
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx")]
+    public partial class Department : BaseModel {
+        
+        private int idField;
+        
+        private string nameField;
+        
+        private bool activeField;
+        
+        private string descriptionField;
+        
+        private string axIdField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+                this.RaisePropertyChanged("Id");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+                this.RaisePropertyChanged("Name");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public bool Active {
+            get {
+                return this.activeField;
+            }
+            set {
+                this.activeField = value;
+                this.RaisePropertyChanged("Active");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+                this.RaisePropertyChanged("Description");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string AxId {
+            get {
+                return this.axIdField;
+            }
+            set {
+                this.axIdField = value;
+                this.RaisePropertyChanged("AxId");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx")]
+    public partial class PrSubTask : BaseModel {
+        
+        private int idField;
+        
+        private string nameField;
+        
+        private string poNumberField;
+        
+        private int revisionField;
+        
+        private PrEproc prField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+                this.RaisePropertyChanged("Id");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+                this.RaisePropertyChanged("Name");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string PoNumber {
+            get {
+                return this.poNumberField;
+            }
+            set {
+                this.poNumberField = value;
+                this.RaisePropertyChanged("PoNumber");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public int Revision {
+            get {
+                return this.revisionField;
+            }
+            set {
+                this.revisionField = value;
+                this.RaisePropertyChanged("Revision");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public PrEproc PR {
+            get {
+                return this.prField;
+            }
+            set {
+                this.prField = value;
+                this.RaisePropertyChanged("PR");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PrLineEproc))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx")]
+    public partial class PurchaseRequisitionLine : BaseModel {
+        
+        private int idField;
+        
+        private int numberField;
+        
+        private string descriptionField;
+        
+        private int quantityField;
+        
+        private string unitField;
+        
+        private double unitCostField;
+        
+        private double lineCostField;
+        
+        private double taxField;
+        
+        private bool activeField;
+        
+        private PurchaseRequisition prField;
+        
+        private int lineNumberField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+                this.RaisePropertyChanged("Id");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public int Number {
+            get {
+                return this.numberField;
+            }
+            set {
+                this.numberField = value;
+                this.RaisePropertyChanged("Number");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+                this.RaisePropertyChanged("Description");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=3)]
+        public int Quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+                this.RaisePropertyChanged("Quantity");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=4)]
+        public string Unit {
+            get {
+                return this.unitField;
+            }
+            set {
+                this.unitField = value;
+                this.RaisePropertyChanged("Unit");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=5)]
+        public double UnitCost {
+            get {
+                return this.unitCostField;
+            }
+            set {
+                this.unitCostField = value;
+                this.RaisePropertyChanged("UnitCost");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=6)]
+        public double LineCost {
+            get {
+                return this.lineCostField;
+            }
+            set {
+                this.lineCostField = value;
+                this.RaisePropertyChanged("LineCost");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=7)]
+        public double Tax {
+            get {
+                return this.taxField;
+            }
+            set {
+                this.taxField = value;
+                this.RaisePropertyChanged("Tax");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=8)]
+        public bool Active {
+            get {
+                return this.activeField;
+            }
+            set {
+                this.activeField = value;
+                this.RaisePropertyChanged("Active");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=9)]
+        public PurchaseRequisition PR {
+            get {
+                return this.prField;
+            }
+            set {
+                this.prField = value;
+                this.RaisePropertyChanged("PR");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=10)]
+        public int LineNumber {
+            get {
+                return this.lineNumberField;
+            }
+            set {
+                this.lineNumberField = value;
+                this.RaisePropertyChanged("LineNumber");
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx")]
+    public partial class PrLineEproc : PurchaseRequisitionLine {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Find", WrapperNamespace="http://localhost:8888/Services/ITPI/Service1.asmx", IsWrapped=true)]
+    public partial class FindRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx", Order=0)]
+        public ConsoleAppClient.ITPIService.BaseModel model;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx", Order=1)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("ArrayOfString")]
+        [System.Xml.Serialization.XmlArrayItemAttribute(NestingLevel=1)]
+        public string[][] criteria;
+        
+        public FindRequest() {
+        }
+        
+        public FindRequest(ConsoleAppClient.ITPIService.BaseModel model, string[][] criteria) {
+            this.model = model;
+            this.criteria = criteria;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="FindResponse", WrapperNamespace="http://localhost:8888/Services/ITPI/Service1.asmx", IsWrapped=true)]
+    public partial class FindResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://localhost:8888/Services/ITPI/Service1.asmx", Order=0)]
+        public string FindResult;
+        
+        public FindResponse() {
+        }
+        
+        public FindResponse(string FindResult) {
+            this.FindResult = FindResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface Service1SoapChannel : ConsoleAppClient.ITPIService.Service1Soap, System.ServiceModel.IClientChannel {
     }
@@ -993,6 +1286,18 @@ namespace ConsoleAppClient.ITPIService {
             return base.Channel.Message(request);
         }
         
+        public string GetPrInfo(ConsoleAppClient.ITPIService.PrEproc domain) {
+            return base.Channel.GetPrInfo(domain);
+        }
+        
+        public string GetPrLineInfo(ConsoleAppClient.ITPIService.PrLineEproc domain) {
+            return base.Channel.GetPrLineInfo(domain);
+        }
+        
+        public string GetPrSubtaskInfo(ConsoleAppClient.ITPIService.PrSubTask domain) {
+            return base.Channel.GetPrSubtaskInfo(domain);
+        }
+        
         public string InsertDepartment(ConsoleAppClient.ITPIService.Department departemen) {
             return base.Channel.InsertDepartment(departemen);
         }
@@ -1021,8 +1326,33 @@ namespace ConsoleAppClient.ITPIService {
             return base.Channel.InsertPrLine(prl);
         }
         
+        public string InsertPrDocument(ConsoleAppClient.ITPIService.PrDocument prDoc) {
+            return base.Channel.InsertPrDocument(prDoc);
+        }
+        
         public string Get(ConsoleAppClient.ITPIService.BaseModel model) {
             return base.Channel.Get(model);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ConsoleAppClient.ITPIService.FindResponse ConsoleAppClient.ITPIService.Service1Soap.Find(ConsoleAppClient.ITPIService.FindRequest request) {
+            return base.Channel.Find(request);
+        }
+        
+        public string Find(ConsoleAppClient.ITPIService.BaseModel model, string[][] criteria) {
+            ConsoleAppClient.ITPIService.FindRequest inValue = new ConsoleAppClient.ITPIService.FindRequest();
+            inValue.model = model;
+            inValue.criteria = criteria;
+            ConsoleAppClient.ITPIService.FindResponse retVal = ((ConsoleAppClient.ITPIService.Service1Soap)(this)).Find(inValue);
+            return retVal.FindResult;
+        }
+        
+        public bool IsPrApproved(string prId) {
+            return base.Channel.IsPrApproved(prId);
+        }
+        
+        public string CreatePO(string jsonParameters) {
+            return base.Channel.CreatePO(jsonParameters);
         }
     }
 }

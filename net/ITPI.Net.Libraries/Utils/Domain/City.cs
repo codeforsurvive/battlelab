@@ -20,7 +20,7 @@ namespace ITPI.Net.Utils.Domain
         {
             autoIncrement = true;
             IdColumn = City.Columns.Id;
-            tableName = "mst_kota";
+            tableName = "tmp_mst_kota";
             Id = 0;
         }
 
@@ -53,7 +53,7 @@ namespace ITPI.Net.Utils.Domain
                 select new City
                 {
                     Id = Convert.ToInt32((String)x.Element("kota_id") ?? "0"),
-                    Province = Province.ParseFirstXml((String)x.Element("provinsi_id") ?? "0", "mst_provinsi"),
+                    Province = Province.ParseFirst(new Province().Get((String)x.Element("provinsi_id"))),
                     Name = (String)x.Element("kota_nama") ?? String.Empty
                 }).ToList();
             return result;
@@ -78,6 +78,22 @@ namespace ITPI.Net.Utils.Domain
             var result = ParseDataSet(ds);
 
             return (result == null || result.Count <= 0) ? new City() : result[0];
+        }
+
+        public override bool Exist()
+        {
+            Dictionary<String, String> criteria = new Dictionary<string, string>();
+            criteria.Add("kota_nama", Name);
+            System.Data.DataSet ds = Get(criteria);
+            bool state = !(ds.Tables.Count <= 0 || ds.Tables[0].Rows.Count <= 0);
+            if (state)
+            {
+                City temp = City.ParseFirst(ds);
+                Id = temp.Id;
+                Name = temp.Name;
+                Province = (Province.Id == 0) ? temp.Province : Province;
+            }
+            return state;
         }
 
 
@@ -115,7 +131,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[City.Columns.Name]].ToString();
+                return (fields[columnsMap[City.Columns.Name]] == null) ? String.Empty : fields[columnsMap[City.Columns.Name]].ToString();
             }
         }
 

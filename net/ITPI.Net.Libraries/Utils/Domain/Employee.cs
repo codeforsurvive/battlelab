@@ -50,7 +50,15 @@ namespace ITPI.Net.Utils.Domain
 
         protected override void PrepareSave()
         {
+            this.DateCreated = DateTime.Now.ToString();
+            this.LastUpdate = DateTime.Now.ToString();
             this.Department.Save();
+            System.Data.DataSet ds = new System.Data.DataSet();
+            Dictionary<String, String> criteria = new Dictionary<string, string>();
+            criteria.Add("departemen_ax_id", this.Department.AxId);
+            ds = this.Department.Get(criteria);
+            //Console.WriteLine(ds.GetXml());
+            this.Department = Domain.Department.ParseFirst(ds);
             this.Role.Save();
         }
 
@@ -75,11 +83,61 @@ namespace ITPI.Net.Utils.Domain
                     Username = (String)x.Element("username") ?? String.Empty,
                     Password = (String)x.Element("password") ?? String.Empty,
                     Section = (String)x.Element("bagian") ?? String.Empty,
-                    Department = Department.ParseFirstXml((String)x.Element("departemen"), "tmp_departemen2"),
-                    Role = Roles.ParseFirstXml((String)x.Element("role_id"), "tmp_roles")
+                    Department = Department.ParseFirst(new Department().Get((String)x.Element("departemen"))),
+                    Role = Roles.ParseFirst(new Roles().Get((String)x.Element("role_id")))
                 }).ToList();
             return result;
 
+        }
+
+        public static Employee ParseFirstXml(string xml, String rootElement)
+        {
+
+            var result = ParseXml(xml, rootElement);
+
+            return (result == null || result.Count <= 0) ? new Employee() : result[0];
+        }
+
+        public static List<Employee> ParseDataSet(System.Data.DataSet ds)
+        {
+            return Employee.ParseXml(ds.GetXml(), "Table");
+        }
+
+        public static Employee ParseFirst(System.Data.DataSet ds)
+        {
+            var result = ParseDataSet(ds);
+
+            return (result == null || result.Count <= 0) ? new Employee() : result[0];
+        }
+
+        public override bool Exist()
+        {
+            Dictionary<String, String> criteria = new Dictionary<string, string>();
+            criteria.Add("nik", NIK);
+            System.Data.DataSet ds = Get(criteria);
+            bool state = !(ds.Tables.Count <= 0 || ds.Tables[0].Rows.Count <= 0);
+            if (state)
+            {
+                Employee emp = Employee.ParseFirst(ds);
+                Id = emp.Id;
+                Name = String.IsNullOrEmpty(Name) ? emp.Name : Name;
+                NIK = String.IsNullOrEmpty(NIK) ? emp.NIK : NIK;
+                Email = String.IsNullOrEmpty(Email) ? emp.Email : Email;
+                Phone = String.IsNullOrEmpty(Phone) ? emp.Phone : Phone;
+                DateCreated =  emp.DateCreated ?? DateTime.Now.ToString();
+                CreatedBy = emp.CreatedBy;
+                UpdatedBy = emp.UpdatedBy;
+                LastUpdate = DateTime.Now.ToString();
+                //Active = (!Active) ? emp.Active : Active;
+                Username = String.IsNullOrEmpty(Username) ? emp.Username : Username;
+                Password = String.IsNullOrEmpty(Password) ? emp.Password : Password;
+                Section = String.IsNullOrEmpty(Section)   ? emp.Section  : Section;
+                Department = (Department.Id == 0) ? emp.Department : Department;
+                Role = (Role.Id == 0) ? emp.Role : Role;
+
+            }
+
+            return state;
         }
 
 
@@ -104,7 +162,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Employee.Columns.Name]].ToString();
+                return (fields[columnsMap[Employee.Columns.Name]] == null) ? String.Empty : fields[columnsMap[Employee.Columns.Name]].ToString();
             }
 
         }
@@ -117,7 +175,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Employee.Columns.NIK]].ToString();
+                return (fields[columnsMap[Employee.Columns.NIK]] == null) ? String.Empty : fields[columnsMap[Employee.Columns.NIK]].ToString();
             }
 
         }
@@ -130,7 +188,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Employee.Columns.Email]].ToString();
+                return (fields[columnsMap[Employee.Columns.Email]] == null) ? String.Empty : fields[columnsMap[Employee.Columns.Email]].ToString();
             }
 
         }
@@ -143,7 +201,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Employee.Columns.Phone]].ToString();
+                return (fields[columnsMap[Employee.Columns.Phone]] == null) ? String.Empty : fields[columnsMap[Employee.Columns.Phone]].ToString();
             }
         }
 
@@ -205,7 +263,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Employee.Columns.Username]].ToString();
+                return (fields[columnsMap[Employee.Columns.Username]] == null) ? String.Empty : fields[columnsMap[Employee.Columns.Username]].ToString();
             }
         }
 
@@ -217,7 +275,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Employee.Columns.Password]].ToString();
+                return (fields[columnsMap[Employee.Columns.Password]] == null) ? String.Empty : fields[columnsMap[Employee.Columns.Password]].ToString();
             }
 
         }
@@ -242,7 +300,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Employee.Columns.Position]].ToString();
+                return (fields[columnsMap[Employee.Columns.Position]] == null) ? String.Empty : fields[columnsMap[Employee.Columns.Position]].ToString();
             }
         }
 
@@ -254,7 +312,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Employee.Columns.Section]].ToString();
+                return (fields[columnsMap[Employee.Columns.Section]] == null) ? String.Empty : fields[columnsMap[Employee.Columns.Section]].ToString();
             }
         }
 

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ITPI.Net.Utils</RootNamespace>
     <AssemblyName>ITPI.Net.Utils</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,12 +50,19 @@
     <Compile Include="Domain\DataAccess.cs" />
     <Compile Include="Domain\Department.cs" />
     <Compile Include="Domain\Employee.cs" />
+    <Compile Include="Domain\PrDocument.cs" />
+    <Compile Include="Domain\PrEproc.cs" />
+    <Compile Include="Domain\PrLineEproc.cs" />
     <Compile Include="Domain\Province.cs" />
+    <Compile Include="Domain\PrSubTask.cs" />
+    <Compile Include="Domain\PrVendor.cs" />
+    <Compile Include="Domain\PurchaseOrder.cs" />
     <Compile Include="Domain\PurchaseRequisition.cs" />
     <Compile Include="Domain\PurchaseRequisitionLine.cs" />
     <Compile Include="Domain\Roles.cs" />
     <Compile Include="Domain\Test.cs" />
     <Compile Include="Domain\Vendor.cs" />
+    <Compile Include="Domain\ViewPengumumanPengadaan.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Logger.cs" />

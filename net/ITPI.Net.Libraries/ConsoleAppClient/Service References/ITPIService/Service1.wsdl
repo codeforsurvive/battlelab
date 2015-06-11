@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://localhost:8888/Services/ITPI/Service1.asmx" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://localhost:8888/Services/ITPI/Service1.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://localhost:8888/Services/ITPI/Service1.asmx" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://localhost:8888/Services/ITPI/Service1.asmx" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://localhost:8888/Services/ITPI/Service1.asmx">
       <s:element name="Message">
@@ -13,6 +13,105 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="MessageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="tns:PrEproc" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PrEproc">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PurchaseRequisition" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PurchaseRequisition">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseModel">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Confirmed" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="Created" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="DocumentUrl" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseModel" />
+      <s:element name="GetPrInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrLineInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="tns:PrLineEproc" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PrLineEproc">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:PurchaseRequisitionLine" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PurchaseRequisitionLine">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseModel">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Number" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="UnitCost" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="LineCost" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Tax" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="PR" type="tns:PurchaseRequisition" />
+              <s:element minOccurs="1" maxOccurs="1" name="LineNumber" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetPrLineInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrLineInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrSubtaskInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="domain" type="tns:PrSubTask" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PrSubTask">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseModel">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PoNumber" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Revision" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="PR" type="tns:PrEproc" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetPrSubtaskInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrSubtaskInfoResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -31,11 +130,11 @@
               <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
               <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AxId" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:complexType name="BaseModel" />
       <s:element name="InsertDepartmentResponse">
         <s:complexType>
           <s:sequence>
@@ -117,6 +216,8 @@
               <s:element minOccurs="0" maxOccurs="1" name="Province" type="tns:Province" />
               <s:element minOccurs="0" maxOccurs="1" name="BankAccountName" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="BankAccountNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AxId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="OnHold" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -184,19 +285,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="PurchaseRequisition">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:BaseModel">
-            <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
-              <s:element minOccurs="1" maxOccurs="1" name="Code" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
-              <s:element minOccurs="1" maxOccurs="1" name="Confirmed" type="s:boolean" />
-              <s:element minOccurs="1" maxOccurs="1" name="Created" type="s:boolean" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
       <s:element name="InsertPRResponse">
         <s:complexType>
           <s:sequence>
@@ -211,29 +299,36 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="PurchaseRequisitionLine">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:BaseModel">
-            <s:sequence>
-              <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
-              <s:element minOccurs="1" maxOccurs="1" name="Number" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
-              <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:int" />
-              <s:element minOccurs="0" maxOccurs="1" name="Unit" type="s:string" />
-              <s:element minOccurs="1" maxOccurs="1" name="UnitCost" type="s:double" />
-              <s:element minOccurs="1" maxOccurs="1" name="LineCost" type="s:double" />
-              <s:element minOccurs="1" maxOccurs="1" name="Tax" type="s:double" />
-              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
-              <s:element minOccurs="0" maxOccurs="1" name="PR" type="tns:PurchaseRequisition" />
-              <s:element minOccurs="1" maxOccurs="1" name="LineNumber" type="s:int" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
       <s:element name="InsertPrLineResponse">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="InsertPrLineResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertPrDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="prDoc" type="tns:PrDocument" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PrDocument">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseModel">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrlDocument" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PR" type="tns:PurchaseRequisition" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="InsertPrDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertPrDocumentResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -251,7 +346,61 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="Find">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="model" type="tns:BaseModel" />
+            <s:element minOccurs="0" maxOccurs="1" name="criteria" type="tns:ArrayOfArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FindResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FindResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsPrApproved">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="prId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsPrApprovedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsPrApprovedResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreatePO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jsonParameters" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreatePOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreatePOResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="boolean" type="s:boolean" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="MessageSoapIn">
@@ -259,6 +408,24 @@
   </wsdl:message>
   <wsdl:message name="MessageSoapOut">
     <wsdl:part name="parameters" element="tns:MessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetPrInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrLineInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrLineInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetPrLineInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrLineInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrSubtaskInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrSubtaskInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetPrSubtaskInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrSubtaskInfoResponse" />
   </wsdl:message>
   <wsdl:message name="InsertDepartmentSoapIn">
     <wsdl:part name="parameters" element="tns:InsertDepartment" />
@@ -302,16 +469,52 @@
   <wsdl:message name="InsertPrLineSoapOut">
     <wsdl:part name="parameters" element="tns:InsertPrLineResponse" />
   </wsdl:message>
+  <wsdl:message name="InsertPrDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertPrDocument" />
+  </wsdl:message>
+  <wsdl:message name="InsertPrDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertPrDocumentResponse" />
+  </wsdl:message>
   <wsdl:message name="GetSoapIn">
     <wsdl:part name="parameters" element="tns:Get" />
   </wsdl:message>
   <wsdl:message name="GetSoapOut">
     <wsdl:part name="parameters" element="tns:GetResponse" />
   </wsdl:message>
+  <wsdl:message name="FindSoapIn">
+    <wsdl:part name="parameters" element="tns:Find" />
+  </wsdl:message>
+  <wsdl:message name="FindSoapOut">
+    <wsdl:part name="parameters" element="tns:FindResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsPrApprovedSoapIn">
+    <wsdl:part name="parameters" element="tns:IsPrApproved" />
+  </wsdl:message>
+  <wsdl:message name="IsPrApprovedSoapOut">
+    <wsdl:part name="parameters" element="tns:IsPrApprovedResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreatePOSoapIn">
+    <wsdl:part name="parameters" element="tns:CreatePO" />
+  </wsdl:message>
+  <wsdl:message name="CreatePOSoapOut">
+    <wsdl:part name="parameters" element="tns:CreatePOResponse" />
+  </wsdl:message>
   <wsdl:message name="MessageHttpGetIn">
     <wsdl:part name="request" type="s:string" />
   </wsdl:message>
   <wsdl:message name="MessageHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="IsPrApprovedHttpGetIn">
+    <wsdl:part name="prId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsPrApprovedHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CreatePOHttpGetIn">
+    <wsdl:part name="jsonParameters" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreatePOHttpGetOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
   <wsdl:message name="MessageHttpPostIn">
@@ -320,10 +523,34 @@
   <wsdl:message name="MessageHttpPostOut">
     <wsdl:part name="Body" element="tns:string" />
   </wsdl:message>
+  <wsdl:message name="IsPrApprovedHttpPostIn">
+    <wsdl:part name="prId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsPrApprovedHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CreatePOHttpPostIn">
+    <wsdl:part name="jsonParameters" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreatePOHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
   <wsdl:portType name="Service1Soap">
     <wsdl:operation name="Message">
       <wsdl:input message="tns:MessageSoapIn" />
       <wsdl:output message="tns:MessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrInfo">
+      <wsdl:input message="tns:GetPrInfoSoapIn" />
+      <wsdl:output message="tns:GetPrInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrLineInfo">
+      <wsdl:input message="tns:GetPrLineInfoSoapIn" />
+      <wsdl:output message="tns:GetPrLineInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrSubtaskInfo">
+      <wsdl:input message="tns:GetPrSubtaskInfoSoapIn" />
+      <wsdl:output message="tns:GetPrSubtaskInfoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InsertDepartment">
       <wsdl:input message="tns:InsertDepartmentSoapIn" />
@@ -353,9 +580,25 @@
       <wsdl:input message="tns:InsertPrLineSoapIn" />
       <wsdl:output message="tns:InsertPrLineSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="InsertPrDocument">
+      <wsdl:input message="tns:InsertPrDocumentSoapIn" />
+      <wsdl:output message="tns:InsertPrDocumentSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="Get">
       <wsdl:input message="tns:GetSoapIn" />
       <wsdl:output message="tns:GetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Find">
+      <wsdl:input message="tns:FindSoapIn" />
+      <wsdl:output message="tns:FindSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsPrApproved">
+      <wsdl:input message="tns:IsPrApprovedSoapIn" />
+      <wsdl:output message="tns:IsPrApprovedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePO">
+      <wsdl:input message="tns:CreatePOSoapIn" />
+      <wsdl:output message="tns:CreatePOSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="Service1HttpGet">
@@ -363,17 +606,60 @@
       <wsdl:input message="tns:MessageHttpGetIn" />
       <wsdl:output message="tns:MessageHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="IsPrApproved">
+      <wsdl:input message="tns:IsPrApprovedHttpGetIn" />
+      <wsdl:output message="tns:IsPrApprovedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePO">
+      <wsdl:input message="tns:CreatePOHttpGetIn" />
+      <wsdl:output message="tns:CreatePOHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="Service1HttpPost">
     <wsdl:operation name="Message">
       <wsdl:input message="tns:MessageHttpPostIn" />
       <wsdl:output message="tns:MessageHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="IsPrApproved">
+      <wsdl:input message="tns:IsPrApprovedHttpPostIn" />
+      <wsdl:output message="tns:IsPrApprovedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePO">
+      <wsdl:input message="tns:CreatePOHttpPostIn" />
+      <wsdl:output message="tns:CreatePOHttpPostOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Message">
       <soap:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/Message" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrInfo">
+      <soap:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/GetPrInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrLineInfo">
+      <soap:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/GetPrLineInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrSubtaskInfo">
+      <soap:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/GetPrSubtaskInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -444,8 +730,44 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InsertPrDocument">
+      <soap:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/InsertPrDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Get">
       <soap:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Find">
+      <soap:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/Find" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPrApproved">
+      <soap:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/IsPrApproved" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePO">
+      <soap:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/CreatePO" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -458,6 +780,33 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Message">
       <soap12:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/Message" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrInfo">
+      <soap12:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/GetPrInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrLineInfo">
+      <soap12:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/GetPrLineInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrSubtaskInfo">
+      <soap12:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/GetPrSubtaskInfo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -528,8 +877,44 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InsertPrDocument">
+      <soap12:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/InsertPrDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Get">
       <soap12:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/Get" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Find">
+      <soap12:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/Find" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPrApproved">
+      <soap12:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/IsPrApproved" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePO">
+      <soap12:operation soapAction="http://localhost:8888/Services/ITPI/Service1.asmx/CreatePO" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -549,6 +934,24 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="IsPrApproved">
+      <http:operation location="/IsPrApproved" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePO">
+      <http:operation location="/CreatePO" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="Service1HttpPost" type="tns:Service1HttpPost">
     <http:binding verb="POST" />
@@ -561,19 +964,37 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="IsPrApproved">
+      <http:operation location="/IsPrApproved" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePO">
+      <http:operation location="/CreatePO" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Service1">
     <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
-      <soap:address location="http://localhost:8888/Services/ITPI/Service1.asmx" />
+      <soap:address location="http://172.19.154.79:100/Service1.asmx" />
     </wsdl:port>
     <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
-      <soap12:address location="http://localhost:8888/Services/ITPI/Service1.asmx" />
+      <soap12:address location="http://172.19.154.79:100/Service1.asmx" />
     </wsdl:port>
     <wsdl:port name="Service1HttpGet" binding="tns:Service1HttpGet">
-      <http:address location="http://localhost:8888/Services/ITPI/Service1.asmx" />
+      <http:address location="http://172.19.154.79:100/Service1.asmx" />
     </wsdl:port>
     <wsdl:port name="Service1HttpPost" binding="tns:Service1HttpPost">
-      <http:address location="http://localhost:8888/Services/ITPI/Service1.asmx" />
+      <http:address location="http://172.19.154.79:100/Service1.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

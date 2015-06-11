@@ -43,6 +43,21 @@ namespace ITPI.Net.Utils.Domain
             // Do nothing
         }
 
+        public override bool Exist()
+        {
+            Dictionary<String, String> criteria = new Dictionary<string, string>();
+            criteria.Add("provinsi_nama", Name);
+            System.Data.DataSet ds = Get(criteria);
+            bool state = !(ds.Tables.Count <= 0 || ds.Tables[0].Rows.Count <= 0);
+            if (state)
+            {
+                Province temp = Province.ParseFirst(ds);
+                Id = temp.Id;
+                Name = temp.Name;
+            }
+            return state;
+        }
+
         public static List<Province> ParseXml(String xml, String rootElement)
         {
             XElement root = XElement.Parse(xml);
@@ -101,7 +116,7 @@ namespace ITPI.Net.Utils.Domain
             }
             get
             {
-                return fields[columnsMap[Province.Columns.Name]].ToString();
+                return (fields[columnsMap[Province.Columns.Name]] == null) ? String.Empty : fields[columnsMap[Province.Columns.Name]].ToString();
             }
         }
 

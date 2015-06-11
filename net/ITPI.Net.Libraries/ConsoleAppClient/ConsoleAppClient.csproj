@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ConsoleAppClient</RootNamespace>
     <AssemblyName>ConsoleAppClient</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,7 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Services3">
+      <HintPath>..\packages\Microsoft.Web.Services3.3.0.0.0\lib\net20\Microsoft.Web.Services3.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -42,9 +50,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MaximoEprocService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\AxEprocService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ITPIService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\MaximoEprocService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -57,7 +76,33 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ITPIService\Service11.wsdl" />
+    <None Include="packages.config" />
+    <None Include="Service References\AxEprocService\EprocAxMaximoServiceGroup.wsdl" />
+    <None Include="Service References\AxEprocService\EprocAxMaximoServiceGroup.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AxEprocService\EprocAxMaximoServiceGroup1.wsdl" />
+    <None Include="Service References\AxEprocService\EprocAxMaximoServiceGroup1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AxEprocService\EprocAxMaximoServiceGroup2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AxEprocService\EprocAxMaximoServiceGroup3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AxEprocService\EprocAxMaximoServiceGroup4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\AxEprocService\EprocAxMaximoServiceGroup5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ITPIService\Service1.wsdl" />
+    <None Include="Service References\MaximoEprocService\ConsoleAppClient.MaximoEprocService.POKeyType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MaximoEprocService\EPROC_TPSCPOInterface.wsdl" />
+    <None Include="service.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\ITPI.Net.Utils.csproj">
@@ -66,7 +111,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AxEprocService\" />
     <WCFMetadataStorage Include="Service References\ITPIService\" />
+    <WCFMetadataStorage Include="Service References\MaximoEprocService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ITPIService\configuration91.svcinfo" />
@@ -76,6 +123,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ITPIService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MaximoEprocService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MaximoEprocService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MaximoEprocService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AxEprocService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AxEprocService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\AxEprocService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

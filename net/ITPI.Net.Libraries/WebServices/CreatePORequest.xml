@@ -1,0 +1,31 @@
+﻿<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:max="http://www.ibm.com/maximo">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <max:CreateTPSCPO>
+      <max:TPSCPOSet>
+        <max:PO>
+          <max:DESCRIPTION changed="?">Test Create PO via Web Service</max:DESCRIPTION>
+          <max:SITEID changed="?">SBY</max:SITEID>
+          <max:VENDOR changed="?">TEST01</max:VENDOR>
+          <max:DEPARTMENT changed="?">ENG-IT</max:DEPARTMENT>
+          <max:POSCOPE changed="?">LOCAL</max:POSCOPE>
+          <max:PURCHASEAGENT changed="?">DODOK</max:PURCHASEAGENT>
+          <max:POLINE>
+            <max:POLINENUM changed="?">1</max:POLINENUM>
+            <max:PRLINENUM changed="?">1</max:PRLINENUM>
+            <max:PRNUM changed="?">PR-2023</max:PRNUM>
+            <max:TOSITEID changed="?">SBY</max:TOSITEID>
+            <max:UNITCOST changed="?">800000</max:UNITCOST>
+          </max:POLINE>
+          <max:POLINE>
+            <max:POLINENUM changed="?">2</max:POLINENUM>
+            <max:PRLINENUM changed="?">2</max:PRLINENUM>
+            <max:PRNUM changed="?">PR-2023</max:PRNUM>
+            <max:TOSITEID changed="?">SBY</max:TOSITEID>
+            <max:UNITCOST changed="?">750000</max:UNITCOST>
+          </max:POLINE>
+        </max:PO>
+      </max:TPSCPOSet>
+    </max:CreateTPSCPO>
+  </soapenv:Body>
+</soapenv:Envelope>
