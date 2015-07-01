@@ -84,3 +84,8 @@ define('EXIT_USER_INPUT', 7); // invalid user input
 define('EXIT_DATABASE', 8); // database error
 define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+define('BASE_PATH', 'http://localhost/hmvc-base/');
+define('BASE_UPLOAD', 'http://localhost/hmvc-base/assets/uploads/');
+define('BASE_CSS', 'http://localhost/hmvc-base/assets/css/');
+define('BASE_JS', 'http://localhost/hmvc-base/assets/js/');
+define('BASE_FONT', 'http://localhost/hmvc-base/assets/fonts/');
