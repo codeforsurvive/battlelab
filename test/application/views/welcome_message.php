@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Welcome to CodeIgniter</title>
+        <title>Hello World!</title>
 
         <link rel="stylesheet" type="text/css" href="<?= CSS ?>bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="<?= CSS ?>bootstrap-theme.css" />
@@ -75,12 +75,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 border: 1px solid #D0D0D0;
                 box-shadow: 0 0 8px #D0D0D0;
             }
+            form label.error { color: red; }
         </style>
     </head>
     <body>
         <script>
             $(document).ready(function() {
-                $('#name').mask('AAAAAAAAAA');
+                $('#name').mask('XXXXXXXXXX', {
+                    translation:
+                            {
+                                'X': {
+                                    pattern: /[A-Za-z0-9 ]/
+                                }
+                            }
+                });
                 $('#reg_number').mask('XXX-XXXX', {
                     translation:
                             {
@@ -90,35 +98,59 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             }
                 });
 
+                $('#profileForm').validate({
+                    messages: {
+                        reg_number: {
+                            required: 'Please enter formatted registration number!'
+                        }
+                    }
+                });
+
             });
         </script>
+        </div>
         <div id="container">
-            <h1>Welcome to CodeIgniter!</h1>
+            <h1>Welcome, please complete your profile</h1>
 
             <div id="body">
-                <div class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Registration Number</label>
-                        <div class="col-md-5">
-                            <input type="text" value="" placeholder="Registration Number" class="form-control" id="reg_number" name="reg_number"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Name</label>
-                        <div class="col-md-5">
-                            <input type="text" value="" placeholder="Name" class="form-control" id="name" name="name"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Input File</label>
-                        <div class="col-md-2">
-                            <input type="file" accept=".txt" name="file_upload" id="file_upload" class="btn btn-md btn-info"/>
-                        </div>
+                <form method="post" enctype="multipart/form-data" action="<?= APP_URL ?>welcome/processRequest" id="profileForm">
+                    <div class="form-horizontal">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="reg_number">Registration Number<br/><small>(1-9 numbers only)</small></label>
+                                <div class="col-md-5">
+                                    <input type="text" value="" placeholder="Registration Number" class="form-control" id="reg_number" name="reg_number" data-rule-required="true"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="name">Name<br/><small>(Alphanumeric only)</small></label>
+                                <div class="col-md-5">
+                                    <input type="text" value="" placeholder="Name" class="form-control" id="name" name="name" data-rule-required="true"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="file_upload">Input File</label>
+                                <div class="col-md-2">
+                                    <input type="file" accept=".txt" name="file_upload" id="file_upload" class="btn btn-md btn-info" data-rule-required="true" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="image_upload">Picture Upload</label>
+                                <div class="col-md-2">
+                                    <input type="file" accept="image/*" name="image_upload" id="image_upload" class="btn btn-md btn-info"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2 col-md-offset-2">
+                                    <button type="submit" class="btn btn-md btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Submit Data</button>
+                                </div>
 
+                            </div>
+                        </fieldset>
                     </div>
+                </form>
+            </div>            
 
-                </div>            
-            </div>
             <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
         </div>
 

@@ -14,6 +14,7 @@ class ptk extends CI_Controller
 		$this->load->library('session');
 		$this->load->model('m_ptk');
 		$this->load->model('m_pengguna');
+                $this->load->model('m_pd');
 
 		$this->id_ptk = $this->session->userdata('ID_PENGGUNA');
 		$this->username = $this->session->userdata('USERNAME');
@@ -99,21 +100,21 @@ class ptk extends CI_Controller
 
 	public function doEdit_pd() 
 	{
-		$this->load->model('m_pd','',TRUE);
+		//$this->load->model('m_pd','',TRUE);
 		$this->m_pd->doEdit_pd();
 		redirect('c_pd/index');
 	}
 
 	public function doDelete_pd($id_pd)
 	 {
-		$this->load->model('m_pd','',TRUE);
+		//$this->load->model('m_pd','',TRUE);
 		$this->m_pd->doDelete_pd($id_pd);
 		redirect('c_pd/index');
 	}
 
 	public function getDetailById($id_pd)
 	{
-		$this->load->model('m_pd','',TRUE);
+		//$this->load->model('m_pd','',TRUE);
 		$this->m_pd->getDetailById();
 		redirect('c_pd/index');
 	}

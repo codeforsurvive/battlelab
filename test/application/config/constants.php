@@ -88,7 +88,8 @@ define('URL','http://localhost/test/');
 define('IMG',URL.'assets/img/');
 define('CSS',URL.'assets/css/');
 define('JS',URL.'assets/js/');
-
+define('UPLOAD', URL. 'uploads/');
+define('APP_URL', "http://localhost/test/index.php/");
 
 
 

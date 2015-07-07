@@ -106,16 +106,16 @@
 
 		function get_data_diri_siswa($username) {
 			
-			$query=$this->db->query("SELECT `master_sekolah`.ID_SEKOLAH, `NAMA_SEKOLAH`, 
+			$query=$this->db->query("SELECT `mst_sekolah`.ID_SEKOLAH, `NAMA_SEKOLAH`, 
 											`rombel`.ID_ROMBEL, `NAMA_KELAS`, 
 											`rombel`.ID_TAHUN_AJAR, `semester_thn_ajar`, `NAMA_TAHUN_AJAR`, 
 											`NAMA_PD`, `AKSES_LEVEL`  
-									from `master_sekolah`, 
-										 `master_pd` , 
+									from `mst_sekolah`, 
+										 `mst_pd` , 
 										 `rombel`, 
-										 `master_tahun_ajar`,
+										 `mst_tahun_ajar`,
 										 `pengguna`
-									where `master_sekolah`.ID_SEKOLAH = `rombel`.ID_SEKOLAH 
+									where `mst_sekolah`.ID_SEKOLAH = `rombel`.ID_SEKOLAH 
 											and `master_pd`.ID_ROMBEL = `rombel`.ID_ROMBEL 
 											and `rombel`.ID_TAHUN_AJAR = `master_tahun_ajar`.ID_TAHUN_AJAR
 											and `master_pd`.NISN = '$username' and `master_pd`.NISN = `pengguna`.USERNAME ");
