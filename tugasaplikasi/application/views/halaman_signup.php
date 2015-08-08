@@ -21,26 +21,27 @@
     <body class="bg-black">
 
         <div class="form-box" id="login-box">
-            <div class="header">Sign In</div>
-            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']?>/login/getLogin">
+            <div class="header">Sign Up</div>
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>/simpan">
                 <div class="body bg-gray">
+                    <div class="form-group">
+                        <input type="nama" id="password" name="nama" class="form-control" placeholder="Nama"  placehol required/>
+                    </div> 
+                    <div class="form-group">
+                        <input type="telp" id="password" name="telp" class="form-control" placeholder="Telepon"  placehol required/>
+                    </div> 
                     <div class="form-group">
                         <input type="email" id="email" name="email" class="form-control" placeholder="Email"  placehol autofocus required/>
                     </div>
                     <div class="form-group">
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password"  placehol required/>
                     </div>  
-                     <?php $info=$this->session->flashdata('info');
-                if(!empty($info));
-                {
-                echo $info;
-                }
-                ?>   
+                     <?php ?>   
                   </div>
                 
                          
                 <div class="footer">                                                               
-                    <button type="submit" class="btn bg-olive btn-block">Sign me in</button>  
+                    <button type="submit" class="btn bg-olive btn-block">Sign up</button>  
                    </div>
             </form>        
         </div>

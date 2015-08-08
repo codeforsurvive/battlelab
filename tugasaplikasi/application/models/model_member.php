@@ -46,9 +46,10 @@ class Model_member extends CI_model {
 
     public function Login($email, $password) {
         $sql ="select * from mst_member where email = '{$email}' and `password` = md5('{$password}') and flag_active = 1";
-        
+        //print_r(array('sql' => $sql));
         $query = $this->db->query($sql);
-        
+        //print_r($query);
+        //die();
         if($query->num_rows() > 0){
             $row = $query->result_array();
             

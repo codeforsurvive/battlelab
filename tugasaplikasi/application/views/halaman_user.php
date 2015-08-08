@@ -8,7 +8,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
     <head>
         <title>Gretong a Ecommerce Category Flat Bootstarp Responsive Website Template | Home :: w3layouts</title>
-        <link href="<?php echo base_url(); ?>assets_user/css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <link href="<?php echo base_url(); ?>assets_admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <link href="<?php echo base_url(); ?>assets_admin/css/font-awesome.css" rel='stylesheet' type='text/css' />
         <!-- jQuery (necessary JavaScript plugins) -->
         <script type='text/javascript' src="<?php echo base_url(); ?>assets_user/js/jquery-1.11.1.min.js"></script>
         <!-- Custom Theme files -->
@@ -23,25 +24,83 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <script src="<?php echo base_url(); ?>js/bootstrap.min.js" type="text/javascript"></script>
         <link href='<?php echo base_url(); ?>assets_user/http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
         <link href='<?php echo base_url(); ?>assets_user/http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900' rel='stylesheet' type='text/css'>
+        <link href="<?php echo base_url(); ?>css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
         <!-- start menu -->
         <link href="<?php echo base_url(); ?>assets_user/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="<?php echo base_url(); ?>assets_user/js/megamenu.js"></script>
-        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+        <script>$(document).ready(function() {
+                $(".megamenu").megamenu();
+            });</script>
         <script src="<?php echo base_url(); ?>js/accounting.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets_user/js/menu_jquery.js"></script>
-        <script src="<?php echo base_url(); ?>assets_user/js/simpleCart.min.js"> </script>
+        <script src="<?php echo base_url(); ?>assets_user/js/simpleCart.min.js"></script>
     </head>
     <body>
+        <script type="text/javascript">
+            function doLogin() {
+                var e = $("#email").val();
+                var p = $("#password").val();
+
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo base_url(); ?>index.php/login/getLogin",
+                    data: {email: e, password: p},
+                    success: function(result) {
+                        var json = JSON.parse(result);
+                        if (json.status) {
+                            if (json.role === 'admin') {
+                                document.location.href = "<?php echo base_url() ?>index.php/home";
+                            } else if (json.role === 'user') {
+                                document.location.href = "<?php echo base_url() ?>index.php/ui_home";
+
+                            } else {
+                                $("#alertMessage").html(json.message);
+                                $("#loginAlert").show();
+                            }
+                        } else {
+                            $("#alertMessage").html(json.message);
+                            $("#loginAlert").show();
+                        }
+                    },
+                    error: function(err) {
+                        alert(err);
+                    }
+                });
+            }
+
+            function doRegister() {
+                var e = $("#email1").val();
+                var p = $("#password1").val();
+                var t = $("#phone").val();
+                var n = $("#name").val();
+
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo base_url(); ?>index.php/login/simpan",
+                    data: {email: e, password: p, nama: n, telp: t},
+                    success: function(result) {
+                        var json = JSON.parse(result);
+                        $("#regAlertMsg").html(json.title);
+                        $("#regAlertMessage").html(json.message);
+                        $("#regAlert").show();
+                    },
+                    error: function(err) {
+                        alert(err);
+                    }
+                });
+
+            }
+
+            function doLogout() {
+                document.location.href = "<?php echo base_url(); ?>index.php/login/getLogout";
+            }
+        </script>
         <!-- header_top -->
         <div class="top_bg">
             <div class="container">
                 <div class="header_top">
-                    <div class="top_right">
-                        <ul>
-                            <li><h2>AndroShop</h2></li>
-                            <a><img src="images/Andro.png" /></a>
-                        </ul>
-                    </div>
                     <div class="top_left">
                         <h2><span></span> Call us : 032 2352 782</h2>
                     </div>
@@ -51,36 +110,115 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
         <!-- header -->
         <div class="header_bg">
-            <img src="images/Andro.png" />
             <div class="container">
                 <div class="header">
                     <div class="head-t">
                         <div class="logo">
-                            <a href="index.html"><img src="images/logo.png" class="img-responsive" alt=""/> </a>
+                            <img src="<?php echo base_url(); ?>assets_user/images/logoo.png" class="img-responsive" alt="" width="500px" >
                         </div>
                         <!-- start header_right -->
                         <div class="header_right">
                             <div class="rgt-bottom">
                                 <div class="col-md-12">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 right">
 
                                         <?php
                                         if (!$login) {
                                             ?>
-                                            <div class="col-md-3 col-md-offset-9">
-                                                <a href="<?php BASE_URL ?>index.php/login"><button class="btn btn-success"><i class="fa fa-sign-in"></i> Login</button></a>
-                                            </div>
-                                        <?php } else { ?>
-                                            <div class="col-md-6">
-                                                <span><?php echo $userLogin['nama']; ?></span>
-                                            </div>
-                                            <div class="col-md-3 col-md-offset-3">
-                                                <a href="<?php BASE_URL ?>index.php/login/getlogout"><button class="btn btn-danger"><i class="fa fa-sign-out"></i> Sign Out</button></a>
+                                            <div class="col-md-offset-7">
+                                                    <!-- <a class="col-md-3 col-md-offset-7" href="<?php echo $_SERVER['PHP_SELF'] ?>/login"><button class="btn btn-success"><i class="fa fa-sign-in"></i> Login</button></a> -->
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in"></i> Login</button> 
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#regModal"><i class="fa fa-user-plus"></i> Daftar</button> 
                                             </div>
 
+                                        <?php } else { ?>
+                                            <div class="btn-group right col-md-offset-8">
+                                                <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <?php echo $userLogin['nama']; ?></a>
+                                                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                                                    <span class="fa fa-caret-down"></span></a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#" onclick="doLogout()"><i class="fa fa-sign-out fa-fw"></i> Sign Out</a></li>
+                                                </ul>
+                                            </div>
                                             <?php
                                         }
                                         ?>
+                                    </div>
+
+                                    <!-- Modal Login-->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="form-box" role="document">
+                                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>login/getLogin" id="loginForm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title header" id="myModalLabel">Sign In</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="alert alert-danger alert-dismissible" role="alert" id="loginAlert" style="display: none">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <strong>Login Failed!</strong> 
+                                                            <span id="alertMessage"></span>
+                                                        </div>
+                                                        <div class="body bg-gray">
+                                                            <div class="form-group">
+                                                                <input type="email" id="email" name="email" class="form-control" placeholder="Email"  placehol autofocus required/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="password" id="password" name="password" class="form-control" placeholder="Password"  placehol required/>
+                                                            </div>  
+                                                            <?php
+                                                            $info = $this->session->flashdata('info');
+                                                            if (!empty($info)) {
+                                                                echo $info;
+                                                            }
+                                                            ?>   
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer footer">
+                                                        <button type="button" class="btn bg-olive btn-block" onclick="doLogin()">Sign me in</button>  
+                                                    </div>
+                                                </div>
+                                            </form>                                                          
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal Register -->
+                                    <div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="myRegLabel">
+                                        <div class="form-box" role="document">
+                                            <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] ?>login/simpan" id="sigupForm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title header" id="myRegLabel">Sign Up</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="alert alert-info alert-dismissible" role="alert" id="regAlert" style="display: none">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <strong id="regAlertMsg"></strong> 
+                                                            <span id="regAlertMessage"></span>
+                                                        </div>
+                                                        <div class="body bg-gray">
+                                                            <div class="form-group">
+                                                                <input type="nama" id="name" name="nama" class="form-control" placeholder="Nama"  placehol required/>
+                                                            </div> 
+                                                            <div class="form-group">
+                                                                <input type="telp" id="phone" name="telp" class="form-control" placeholder="Telepon"  placehol required/>
+                                                            </div> 
+                                                            <div class="form-group">
+                                                                <input type="email" id="email1" name="email" class="form-control" placeholder="Email"  placehol autofocus required/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="password" id="password1" name="password" class="form-control" placeholder="Password"  placehol required/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer footer">
+                                                        <button type="button" class="btn bg-olive btn-block" onclick="doRegister()">Register</button>  
+                                                    </div>
+                                                </div>
+                                            </form>                                                          
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -91,14 +229,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <p><a href="javascript:;" class="simpleCart_empty">(empty card)</a></p>
                                     <div class="clearfix"> </div>
                                 </div>
-                                <div class="create_btn col-md-3">
+                                <br/>
+                                <div class="create_btn col-md-3 col-md-offset-3">
                                     <a href="checkout.html">CHECKOUT</a>
                                 </div>
                                 <div class="clearfix"> </div>
                             </div>
                             <div class="search">
                                 <form>
-                                    <input type="text" value="" placeholder="search...">
+                                    <input type="text" value="" placeholder="search..."id="search">
                                     <input type="submit" value="">
                                 </form>
                             </div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 05, 2015 at 11:11 AM
+-- Generation Time: Aug 08, 2015 at 10:00 AM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `mst_member` (
   `flag_active` tinyint(1) NOT NULL DEFAULT '1',
   `is_admin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_member`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 --
 -- Dumping data for table `mst_member`
@@ -155,7 +155,9 @@ CREATE TABLE IF NOT EXISTS `mst_member` (
 INSERT INTO `mst_member` (`id_member`, `nama`, `telp`, `email`, `password`, `flag_active`, `is_admin`) VALUES
 (32, 'hendrikkk', '(085) 738-9912', 'hendrik@mail.com', '71daf33a616dfc880f754f7ab7598c16', 0, 0),
 (33, 'Jauhar Ali Firdaus', '(085) 732-8991', 'jauharfirdaus78@gmail.com', 'feebc8554051e8b0069154847775ac87', 1, 1),
-(34, 'Hendrik Pratama Putra', '(0857) 2134-1123', 'HendrikP@gmail.com', '71daf33a616dfc880f754f7ab7598c16', 1, 0);
+(34, 'Hendrik Pratama Putra', '(0857) 2134-1123', 'HendrikP@gmail.com', '71daf33a616dfc880f754f7ab7598c16', 1, 0),
+(35, 'tb', '085732899137', 'tb@gmail.com', 'e44d967f3e8a44f6a7fee562af4d82f4', 1, 0),
+(39, 'elisa', '085612345678', 'elisa@gmail.com', '8070b0b01d9042fdbc54f095bd2832ef', 1, 0);
 
 -- --------------------------------------------------------
 

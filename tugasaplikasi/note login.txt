@@ -1,0 +1,12 @@
+admin = email : jauharfirdaus78@gmil.com
+	pass  : jauhar
+
+user = email : HendrikP@gmail.com
+       pass : hendrik
+
+error : kalau daftar sudah bisa masuk database, tapi kalau login tidak bisa..
+	tapi pas di database type pass nya di ubah md5 bisa login
+	soalnya waktu input database type nya belum md5, gimana mas caranya biar bisa jadi md5 waktu daftar 		member/ tambah member?
+
+	contoh data member tidak bisa login : email : elisa@gmail.com
+					      pass : elisa

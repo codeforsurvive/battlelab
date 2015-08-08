@@ -15,10 +15,9 @@ class ui_home extends Ci_Controller {
         $user = $this->session->userdata('user');
         if (!isset($user) || !$user) {
             $this->isi['login'] = FALSE;
-        } else{
+        } else {
             $this->isi['login'] = TRUE;
-            $this->isi['userLogin']  = $user;
-            
+            $this->isi['userLogin'] = $user;
         }
     }
 
@@ -27,5 +26,9 @@ class ui_home extends Ci_Controller {
         $this->load->view('halaman_user', $this->isi);
     }
 
-}
+    public function cart() {
+        $this->isi['content'] = 'home-user/ui-cart';
+        $this->load->view('halaman_user', $this->isi);
+    }
 
+}
