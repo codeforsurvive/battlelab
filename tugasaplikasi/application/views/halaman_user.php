@@ -132,7 +132,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             </div>
 
                                         <?php } else { ?>
-                                            <div class="btn-group right col-md-offset-8">
+                                            <div class="btn-group right col-md-offset-6">
                                                 <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <?php echo $userLogin['nama']; ?></a>
                                                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
                                                     <span class="fa fa-caret-down"></span></a>
