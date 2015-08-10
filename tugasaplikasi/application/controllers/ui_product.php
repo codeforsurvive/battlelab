@@ -25,6 +25,7 @@ class Ui_product extends CI_Controller {
         $user = $this->session->userdata('user');
         if (!isset($user) || !$user) {
             $this->isi['login'] = FALSE;
+            $this->isi['userLogin'] = array();
         } else {
             $this->isi['login'] = TRUE;
             $this->isi['userLogin'] = $user;
@@ -52,8 +53,14 @@ class Ui_product extends CI_Controller {
         echo json_encode(array('harga' => $harga));
     }
 
-    public function chartproduct() {
-        
+    public function emptycart() {
+        $cart = array();
+        $this->session->set_userdata('cart_item', $cart);
+        redirect();
+    }
+
+    public function addproduct() {
+
         $data = array();
 
         $config = array(
@@ -85,19 +92,49 @@ class Ui_product extends CI_Controller {
         $data['module_detail'] = $this->model_paket->getViewPaket($data['paket']['id_paket'], $data['product']['id_product'])->result_array();
         $data['member'] = $user['id_member'];
         $data['harga'] = $this->input->post('harga_aplikasi');
+        $data['jumlah'] = 1;
         //print_r($data);
         //die();
         //$this->session->set_userdata('cart_item', array());
-        if(!$this->session->userdata('cart_item')){
+        if (!$this->session->userdata('cart_item')) {
             $cart = array();
-            array_push($cart, $data);
+            //array_push($cart, $data);
+            $cart[$data['product']['product_id'] . "_" . $data['paket']['paket_id']] = $data;
             $this->session->set_userdata('cart_item', $cart);
-        } else{
-            $cart = $this->session->userdata('cart_item');            
-            array_push($cart, $data);
+        } else {
+            $cart = $this->session->userdata('cart_item');
+            //array_push($cart, $data);
+            $cart[$data['product']['product_id'] . "_" . $data['paket']['paket_id']] = $data;
             $this->session->set_userdata('cart_item', $cart);
         }
-        $cart = $this->session->userdata('cart_item'); 
+        $cart = $this->session->userdata('cart_item');
+        
+        return $cart;
+    }
+    
+    public function  getcart(){
+        $cart = $this->session->userdata('cart_item');
+        
+        echo json_encode($cart);
+    }
+    
+    public function addchart(){
+        $this->addproduct();
+        $this->getcart();
+    }
+
+    public function deleteproduct() {
+        $index = $this->input->post('index');
+        $cart = $this->session->userdata('cart_item');
+        array_splice($cart, $index, 1);
+        
+        $this->session->set_userdata('cart_item', $cart);
+        
+        $this->getcart();
+    }
+
+    public function chartproduct() {
+        $cart = $this->addproduct();
         //print_r($cart);
         $isi['content'] = 'home-user/ui-card-view';
         $isi['judul'] = 'Menu';
@@ -137,7 +174,7 @@ class Ui_product extends CI_Controller {
             $isi['penjelasanP'] = "";
             ;
         }
-        
+
         $isi['data'] = $this->session->userdata('cart_item');
         $isi['login'] = $this->isi['login'];
         $isi['userLogin'] = $this->isi['userLogin'];

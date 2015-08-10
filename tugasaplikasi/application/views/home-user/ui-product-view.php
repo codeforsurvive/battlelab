@@ -1,7 +1,7 @@
 <script>
     function showModal(product){
         $("#id_product").val(product);
-        $("#myModal").modal("show");
+        $("#myProductModal").modal("show");
     }
     
     function hitungHarga(){
@@ -20,12 +20,12 @@
 </script>
 <div class="arriv">
     <div class="container">
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="myProductModal" tabindex="-1" role="dialog" aria-labelledby="myProductModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Pembelian</h4>
+                        <h4 class="modal-title" id="myProductModalLabel">Pembelian</h4>
                     </div>
                     <div class="modal-body">
                         <form>
@@ -78,8 +78,8 @@
                     <?php echo $row->nama_product ?>
                     <img src="<?php echo $row->source ?>" border="2px" class="img-responsive" />
                     <ul class="megamenu skyblue">
-                        <li class="active grid"><a class="color6 btn" href="<?php echo base_url(); ?>index.php/ui_product/detailproduct/<?php echo $row->id_product ?>">Detail</a></li>
-                        <li class="active grid"><a class="color5 btn" onclick="showModal(<?php echo $row->id_product; ?>)"> Beli</a></li>
+                        <li class="active grid"><a class="color6 btn" href="<?php echo base_url(); ?>index.php/ui_product/detailproduct/<?php echo $row->id_product ?>"> <i class="fa fa-lg fa-fw fa-search"></i> Detail</a></li>
+                        <li class="active grid"><a class="color5 btn" onclick="showModal(<?php echo $row->id_product; ?>)"> <i class="fa fa-lg fa-fw fa-shopping-cart"></i> Beli</a></li>
                     </ul>
 
                 </div>

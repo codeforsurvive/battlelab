@@ -220,19 +220,50 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             </form>                                                          
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <div style="height: 20px"></div>
+                                    </div>
+                                    <?php
+                                    if (!$this->session->userdata('cart_item')) {
+                                        $cart = array();
+                                        $this->session->set_userdata('cart_item', $cart);
+                                    }
+                                    $cart = $this->session->userdata('cart_item');
+                                    $cart_item = sizeof($cart);
+                                    ?>
+                                    <div class="clearfix"></div>
+                                    <div class="create_btn col-md-4 col-md-offset-8">
+                                        <button class="btn btn-default" data-toggle="modal" data-target="#cartModal"><i class="fa fa-shopping-cart fa-fw fa-2x"></i> <?php echo $cart_item; ?></button>
+                                    </div>
+                                    <!-- Modal Notif -->
+                                    <div class="modal fade" id="notifModal" tabindex="-1" role="dialog" aria-labelledby="myNotifLabel">
+                                        <div class="container container-fluid">
+                                            <div class="modal-body">
+                                                <div class="alert alert-warning alert-dismissible" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal Cart -->
+                                    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="myRegLabel">
+                                        <div class="container container-fluid bg-gray">
+                                            <div class="modal-body">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title">Keranjang Belanja</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <?php $this->load->view('home-user/ui-cart'); ?>
+                                                </div>
+                                                <div class="modal-footer footer">
+                                                    <button type="button" class="btn btn-success" onclick=""><i class="fa fa-thumbs-up fa-fw fa-lg"></i> Check Out</button>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="clearfix"></div>
-                                <div class="cart box_1 col-md-3">
-                                    <a href="checkout.html">
-                                        <h3> <span class="simpleCart_total">$0.00</span> (<span id="simpleCart_quantity" class="simpleCart_quantity">0</span> items)<img src="images/bag.png" alt=""></h3>
-                                    </a>	
-                                    <p><a href="javascript:;" class="simpleCart_empty">(empty card)</a></p>
-                                    <div class="clearfix"> </div>
-                                </div>
-                                <br/>
-                                <div class="create_btn col-md-3 col-md-offset-3">
-                                    <a href="checkout.html">CHECKOUT</a>
-                                </div>
+
                                 <div class="clearfix"> </div>
                             </div>
                             <div class="search">
