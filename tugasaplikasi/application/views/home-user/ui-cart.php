@@ -5,11 +5,22 @@ if (!$this->session->userdata('cart_item')) {
 }
 $cart = $this->session->userdata('cart_item');
 $cart_item = sizeof($cart);
+
+//print_r($cart);
+//die();
 ?>
 
 <script type="text/javascript">
-    function updateTotal() {
+    
+    
+    function hitungharga(id) {
+        //alert("change " + id);
+        var harga = $("#harga-" + id).html();
+        var jumlah = $("#jumlah-" + id).val();
         
+        var subtotal = Number(harga) * Number(jumlah);
+        
+        $("#subtotal-" + id).val(subtotal);
     }
     
     function emptycart(){
@@ -44,17 +55,14 @@ $cart_item = sizeof($cart);
                 ?>
                 <tr>
                     <td><?php echo $k; ?></td>
-                    <td><?php; ?></td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td><?php echo $d['product']['nama_product']; ?></td>
+                    <td><?php echo $d['paket']['nama_paket']; ?></td>
+                    <td><img src="<?php echo $d ['source']; ?>" width="50px"></td>
+                    <td id="harga-<?php echo $k; ?>"><?php echo $d['harga']; ?></td>
                     <td>
-                        <select class="form-control" id="jumlah">
-                            <option selected>1</option>
-
-                        </select>
+                        <input type="number" id="jumlah-<?php echo $k; ?>" value="<?php echo $d['jumlah']; ?>" min="1" name="jumlah[]" class="number-input form-control" />
                     </td>
-                    <td><input type="text" id="subtotal_" value="0" readonly class="form-control"/></td>
+                    <td><input type="text" id="subtotal-<?php echo $k; ?>" value="<?php echo $d['subtotal']; ?>" name="subtotal[]" readonly class="form-control"/></td>
 
                 </tr>
             <?php endforeach; ?>

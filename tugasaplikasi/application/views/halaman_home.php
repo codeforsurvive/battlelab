@@ -105,12 +105,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<?php echo base_url(); ?>index.php/member"><i class="fa fa-angle-double-right"></i> Member</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/product"><i class="fa fa-angle-double-right"></i> Product</a></li>
-                                <li><a href="<?php echo base_url(); ?>index.php/module"><i class="fa fa-angle-double-right"></i> Module</a></li>
-                                <li><a href="<?php echo base_url(); ?>index.php/pembelian"><i class="fa fa-angle-double-right"></i> Pembelian</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/template"><i class="fa fa-angle-double-right"></i> Template</a></li>
-                                <li><a href="<?php echo base_url(); ?>index.php/paket"><i class="fa fa-angle-double-right"></i> Paket</a></li>
                             </ul>
                         </li>
                     </ul>

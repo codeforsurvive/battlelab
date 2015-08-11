@@ -91,24 +91,25 @@ class Ui_product extends CI_Controller {
         $data['module'] = $this->input->post('id_module');
         $data['module_detail'] = $this->model_paket->getViewPaket($data['paket']['id_paket'], $data['product']['id_product'])->result_array();
         $data['member'] = $user['id_member'];
-        $data['harga'] = $this->input->post('harga_aplikasi');
+        $data['harga'] = $this->input->post('harga_tampilan');
         $data['jumlah'] = 1;
+        $data['subtotal'] = intval($data['harga']) * intval($data['jumlah']);
         //print_r($data);
         //die();
         //$this->session->set_userdata('cart_item', array());
         if (!$this->session->userdata('cart_item')) {
             $cart = array();
             //array_push($cart, $data);
-            $cart[$data['product']['product_id'] . "_" . $data['paket']['paket_id']] = $data;
+            $cart[$data['product']['id_product'] . "_" . $data['paket']['id_paket']] = $data;
             $this->session->set_userdata('cart_item', $cart);
         } else {
             $cart = $this->session->userdata('cart_item');
             //array_push($cart, $data);
-            $cart[$data['product']['product_id'] . "_" . $data['paket']['paket_id']] = $data;
+            $cart[$data['product']['id_product'] . "_" . $data['paket']['id_paket']] = $data;
             $this->session->set_userdata('cart_item', $cart);
         }
         $cart = $this->session->userdata('cart_item');
-        
+        redirect('ui_product');
         return $cart;
     }
     
@@ -226,6 +227,9 @@ class Ui_product extends CI_Controller {
         $isi['login'] = $this->isi['login'];
         $isi['userLogin'] = $this->isi['userLogin'];
         $this->load->view('halaman_user', $isi);
+    }
+    public function laporan () {
+        $this->load-view('laporan');
     }
 
 }
