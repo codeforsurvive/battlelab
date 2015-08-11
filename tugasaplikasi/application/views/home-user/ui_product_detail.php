@@ -209,9 +209,7 @@
             <br/>
             <div class="clearfix"></div>
             <button class="btn btn-primary" type="submit"><i class="fa fa-cart"></i> Tambahkan Ke Cart</button>
-            </form>
         </div>
-
         <div class="clearfix"></div>
     </div>
 </div>

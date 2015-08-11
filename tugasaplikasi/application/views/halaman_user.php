@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>Gretong a Ecommerce Category Flat Bootstarp Responsive Website Template | Home :: w3layouts</title>
+        <title>TokoSoftware.com</title>
         <link href="<?php echo base_url(); ?>assets_admin/css/bootstrap.css" rel='stylesheet' type='text/css' />
         <link href="<?php echo base_url(); ?>assets_admin/css/font-awesome.css" rel='stylesheet' type='text/css' />
         <!-- jQuery (necessary JavaScript plugins) -->
@@ -125,14 +125,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         <?php
                                         if (!$login) {
                                             ?>
-                                            <div class="col-md-offset-7">
+                                            <div class="col-md-offset-6">
                                                     <!-- <a class="col-md-3 col-md-offset-7" href="<?php echo $_SERVER['PHP_SELF'] ?>/login"><button class="btn btn-success"><i class="fa fa-sign-in"></i> Login</button></a> -->
                                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-sign-in"></i> Login</button> 
                                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#regModal"><i class="fa fa-user-plus"></i> Daftar</button> 
                                             </div>
 
                                         <?php } else { ?>
-                                            <div class="btn-group right col-md-offset-6">
+                                            <div class="btn-group right col-md-offset-5">
                                                 <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> <?php echo $userLogin['nama']; ?></a>
                                                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
                                                     <span class="fa fa-caret-down"></span></a>

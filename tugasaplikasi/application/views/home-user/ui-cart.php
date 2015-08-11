@@ -13,7 +13,7 @@ $cart_item = sizeof($cart);
     }
     
     function emptycart(){
-        document.location.href = "<?php echo base_url();?>index.php/ui_product/emptycart";
+        document.location.href = "<?php echo base_url(); ?>index.php/ui_product/emptycart";
     }
 
 
@@ -29,6 +29,8 @@ $cart_item = sizeof($cart);
             <tr>
                 <td>#</td>
                 <td>Produk</td>
+                <td>Paket</td>
+                <td>icon Aplikasi</td>
                 <td>Harga</td>
                 <td>Jumlah</td>
                 <td>Sub Total</td>
@@ -36,22 +38,25 @@ $cart_item = sizeof($cart);
             </tr>
         </thead>
         <tbody>
-            <?php 
+            <?php
             //print_r($cart);
-            foreach ($cart as $k => $d): ?>
-            <tr>
-                <td><?php echo $k ;?></td>
-                <td><?php  ;?></td>
-                <td>&nbsp;</td>
-                <td>
-                    <select class="form-control" id="jumlah">
-                        <option selected>1</option>
+            foreach ($cart as $k => $d):
+                ?>
+                <tr>
+                    <td><?php echo $k; ?></td>
+                    <td><?php; ?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <select class="form-control" id="jumlah">
+                            <option selected>1</option>
 
-                    </select>
-                </td>
-                <td><input type="text" id="subtotal_" value="0" readonly class="form-control"/></td>
-                
-            </tr>
+                        </select>
+                    </td>
+                    <td><input type="text" id="subtotal_" value="0" readonly class="form-control"/></td>
+
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
