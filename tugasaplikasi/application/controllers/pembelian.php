@@ -4,7 +4,8 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 require dirname(__FILE__) . '/AdminController.php';
-class Pembelian extends AdminController  {
+
+class Pembelian extends AdminController {
 
     public function __construct() {
         parent::__construct();
@@ -54,7 +55,7 @@ class Pembelian extends AdminController  {
     }
 
     public function edit() {
-       // $this->model_squrity->getSqurity();
+        // $this->model_squrity->getSqurity();
         $isi['content'] = 'pembelian/form_editpembelian';
         $isi['judul'] = 'Menu';
         $isi['sub_judul'] = 'Edit Pembelian';
@@ -273,6 +274,17 @@ class Pembelian extends AdminController  {
             $isi['source'] = $row->source;
         }
         $this->load->view('halaman_home', $isi);
+    }
+
+    public function isLogin() {
+        $user = $this->session->userdata('user');
+        //var_dump($user);
+        if (!isset($user) || !$user) {
+            //var_dump(FALSE);
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 
 }

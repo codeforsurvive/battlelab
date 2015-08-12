@@ -30,96 +30,122 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- start menu -->
         <link href="<?php echo base_url(); ?>assets_user/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="<?php echo base_url(); ?>assets_user/js/megamenu.js"></script>
-        <script>$(document).ready(function() {
-            $(".megamenu").megamenu();
+        <script>
+            $(document).ready(function() {
+                $(".megamenu").megamenu();
             
-            function getid(id){
-                var tmp = id.split("-");
+                function getid(id){
+                    var tmp = id.split("-");
                 
-                return tmp[1];
-            }
+                    return tmp[1];
+                }
             
-            var inputJumlah = $(".number-input");
-            //alert(inputJumlah.length);
-            for(var i = 0; i < inputJumlah.length; i++ ){
-                inputJumlah[i].addEventListener("input", function(e){
-                    var id = getid(e.target.id);
-                    hitungharga(id);
-                }, false);
+                var inputJumlah = $(".number-input");
+                //alert(inputJumlah.length);
+                for(var i = 0; i < inputJumlah.length; i++ ){
+                    inputJumlah[i].addEventListener("input", function(e){
+                        var id = getid(e.target.id);
+                        hitungharga(id);
+                    }, false);
         
-                inputJumlah[i].addEventListener("keyup", function(e){
-                    console.info("keyup " + e.target.id);
-                }, false);
+                    inputJumlah[i].addEventListener("keyup", function(e){
+                        console.info("keyup " + e.target.id);
+                        var id = getid(e.target.id);
+                        hitungharga(id);
+                    }, false);
         
-                inputJumlah[i].addEventListener("change", function(e){
-                    console.info("change " + e.target.id);
-                }, false);
-            }
+                    inputJumlah[i].addEventListener("change", function(e){
+                        console.info("change " + e.target.id);
+                        var id = getid(e.target.id);
+                        hitungharga(id);
+                    }, false);
+                }
             
-        });</script>
+            });</script>
         <script src="<?php echo base_url(); ?>js/accounting.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets_user/js/menu_jquery.js"></script>
         <script src="<?php echo base_url(); ?>assets_user/js/simpleCart.min.js"></script>
     </head>
     <body>
         <script type="text/javascript">
-        function doLogin() {
-            var e = $("#email").val();
-            var p = $("#password").val();
+            function doLogin() {
+                var e = $("#email").val();
+                var p = $("#password").val();
 
-            $.ajax({
-                type: "post",
-                url: "<?php echo base_url(); ?>index.php/login/getLogin",
-                data: {email: e, password: p},
-                success: function(result) {
-                    var json = JSON.parse(result);
-                    if (json.status) {
-                        if (json.role === 'admin') {
-                            document.location.href = "<?php echo base_url() ?>index.php/home";
-                        } else if (json.role === 'user') {
-                            document.location.href = "<?php echo base_url() ?>index.php/ui_home";
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo base_url(); ?>index.php/login/getLogin",
+                    data: {email: e, password: p},
+                    success: function(result) {
+                        var json = JSON.parse(result);
+                        if (json.status) {
+                            if (json.role === 'admin') {
+                                document.location.href = "<?php echo base_url() ?>index.php/home";
+                            } else if (json.role === 'user') {
+                                document.location.href = "<?php echo base_url() ?>index.php/ui_home";
 
+                            } else {
+                                $("#alertMessage").html(json.message);
+                                $("#loginAlert").show();
+                            }
                         } else {
                             $("#alertMessage").html(json.message);
                             $("#loginAlert").show();
                         }
-                    } else {
-                        $("#alertMessage").html(json.message);
-                        $("#loginAlert").show();
+                    },
+                    error: function(err) {
+                        alert(err);
                     }
-                },
-                error: function(err) {
-                    alert(err);
-                }
-            });
-        }
+                });
+            }
+        
+            function checkout1(){
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo base_url() ?>index.php/login/getLoginStatus",
+                    success: function(result){
+                        var json = JSON.parse(result);
+                        //alert("Status: " + JSON.stringify(json.status));
+                        if(json.status){
+                            //document.location.href = "<?php echo base_url() ?>index.php/ui_product/checkout";
+                            $("#form_jumlah").submit();
+                        } else{
+                            alert("Silahkan login untuk melanjutkan!");
+                        }
+                    },
+                    error: function(err){
+                        alert(err);
+                    }
+                });
+            }
 
-        function doRegister() {
-            var e = $("#email1").val();
-            var p = $("#password1").val();
-            var t = $("#phone").val();
-            var n = $("#name").val();
+            function doRegister() {
+                var e = $("#email1").val();
+                var p = $("#password1").val();
+                var t = $("#phone").val();
+                var n = $("#name").val();
 
-            $.ajax({
-                type: "post",
-                url: "<?php echo base_url(); ?>index.php/login/simpan",
-                data: {email: e, password: p, nama: n, telp: t},
-                success: function(result) {
-                    var json = JSON.parse(result);
-                    $("#regAlertMsg").html(json.title);
-                    $("#regAlertMessage").html(json.message);
-                    $("#regAlert").show();
-                },
-                error: function(err) {
-                    alert(err);
-                }
-            });
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo base_url(); ?>index.php/login/simpan",
+                    data: {email: e, password: p, nama: n, telp: t},
+                    success: function(result) {
+                        var json = JSON.parse(result);
+                        $("#regAlertMsg").html(json.title);
+                        $("#regAlertMessage").html(json.message);
+                        $("#regAlert").show();
+                    },
+                    error: function(err) {
+                        alert(err);
+                    }
+                });
 
-        }
+            }
 
-        function doLogout() {
-            document.location.href = "<?php echo base_url(); ?>index.php/login/getLogout";
-        }
+            function doLogout() {
+                document.location.href = "<?php echo base_url(); ?>index.php/login/getLogout";
+            }
+        
         </script>
         <!-- header_top -->
         <div class="top_bg">
@@ -281,7 +307,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                     <?php $this->load->view('home-user/ui-cart'); ?>
                                                 </div>
                                                 <div class="modal-footer footer">
-                                                    <button type="button" class="btn btn-success" onclick=""><i class="fa fa-thumbs-up fa-fw fa-lg"></i> Check Out</button>  
+                                                    <button type="button" class="btn btn-success" onclick="checkout1()"><i class="fa fa-thumbs-up fa-fw fa-lg"></i> Check Out</button>  
                                                 </div>
                                             </div>
                                         </div>
