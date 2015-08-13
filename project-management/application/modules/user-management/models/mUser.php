@@ -9,7 +9,7 @@ class mUser extends MY_Model {
     const NAME = 'PENGGUNA_NAMA';
     const USERNAME = 'PENGGUNA_USERNAME';
     const PASSWORD = 'PENGGUNA_PASSWORD';
-	const SIGN_PASSWORD = 'PENGGUNA_SIGN_PASSWORD';
+    const SIGN_PASSWORD = 'PENGGUNA_SIGN_PASSWORD';
     const PASSWORD_VALIDATION = 'PENGGUNA_PASSWORD_VAL';
     const EMAIL = 'PENGGUNA_EMAIL';
     const HP = 'PENGGUNA_HP';
@@ -26,6 +26,21 @@ class mUser extends MY_Model {
         $this->idField = mUser::ID;
     }
 
-   
+    public function updatePasswordValidasi($pwd, $id) {
+        $data = array(mUser::PASSWORD_VALIDATION => $pwd, mUser::SIGN_PASSWORD => $pwd);
+
+        $result = $this->_update($data, array($this->idField => $id));
+        $this->save_log('update', $data, array($id));
+        
+        
+        if (!$result) {
+            $errNo = $this->db->_error_number();
+            $errMess = $this->db->_error_message();
+            echo $errMess;
+            return false;
+        }
+
+        return true;
+    }
 
 }

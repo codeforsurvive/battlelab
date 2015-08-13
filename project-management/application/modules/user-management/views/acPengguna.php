@@ -72,12 +72,12 @@
                 data: {
                     user_id: id
                 },
-                dataSrc: function (json) {
+                dataSrc: function(json) {
                     jsonData = json.data;
                     return json.data;
                 }
             },
-            createdRow: function (row, data, index) {
+            createdRow: function(row, data, index) {
                 var id = data[0];
                 //$('td', row).eq(0).html('<div class="btn-group"><button class="btn btn-default btn-xs dropdown-toggle btn-info" data-toggle="dropdown">Aksi <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="javascript:fillUpdate(' + id + ',' + index + ')"><i class="fa fa-refresh fa-fw"></i> Ubah</a></li><li><a href="javascript:confirmDelete(' + id + ')"><i class="fa fa-trash-o fa-fw"></i> Hapus</a></li></ul></div>');
                 $('td', row).eq(1).html(data[4]);
@@ -119,9 +119,9 @@
         $("#deleteModal").modal("hide");
         $("#delete_user_form").submit();
     }
-    $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
-});
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 </script>
 
 <div class="col-md-12">
@@ -385,11 +385,13 @@
                             ?>
                             <tr id="user_<?= $user[mUser::ID] ?>">
                                 <td>
-                                    <div class="btn-group" ng-if="displayField(['pengguna_admin'])">
+                                    <div class="btn-group">
                                         <button class="btn btn-default dropdown-toggle btn-info" data-toggle="dropdown">Pilihan<span class="caret"></span></button>   
                                         <ul class="dropdown-menu">
-                                            <li><button class="btn btn-sm btn-info" style="width: 100%" onclick="fillEditForm(<?= $user[mUser::ID] ?>)"><i class="fa fa-refresh fa-fw"></i>Ubah</button></li>
-                                            <li><button class="btn btn-sm btn-danger" style="width: 100%" onclick="showDeleteModal(<?= $user[mUser::ID] ?>)"><i class="fa fa-trash-o fa-fw"></i>Hapus</button></li>
+                                            <?php if ($user[mUser::ID] === $iduseractive) { ?>
+                                                <li><button class="btn btn-sm btn-info" style="width: 100%" onclick="fillEditForm(<?= $user[mUser::ID] ?>)"><i class="fa fa-refresh fa-fw"></i>Ubah</button></li>
+                                            <?php } ?>
+                                            <li ng-if="displayField(['pengguna_admin'])"><button class="btn btn-sm btn-danger" style="width: 100%" onclick="showDeleteModal(<?= $user[mUser::ID] ?>)"><i class="fa fa-trash-o fa-fw"></i>Hapus</button></li>
                                             <li>
                                                 <form action="<?= base_url() ?>user-management/role/detail" method="post">
                                                     <input type="hidden" value="<?= $user[mUser::ID] ?>" name="<?= mUser::ID ?>"/>

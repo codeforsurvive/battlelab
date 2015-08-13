@@ -225,6 +225,14 @@ class Role extends User_Controller {
         $this->data['admin'] = $this->isAllowed("role_admin");
         $this->display('acUserRole', $this->data);
     }
+    
+    public function updatePasswordValidasi(){
+        $pwd = md5($this->input->post(mUser::PASSWORD_VALIDATION));
+        $id = $this->input->post(mUser::ID);
+        $result = $this->mUser->updatePasswordValidasi($pwd, $id);
+        
+        echo json_encode(array('status' => $result));
+    }
 
     public function addRole() {
         $id = $this->input->post(mUserRole::USER);
