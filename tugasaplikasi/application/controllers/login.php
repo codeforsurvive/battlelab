@@ -18,6 +18,28 @@ class Login extends CI_Controller {
         }
     }
 
+    public function getLoginStatus() {
+        $user = $this->session->userdata('user');
+        //var_dump($user);
+        if (!isset($user) || !$user) {
+            //var_dump(FALSE);
+            echo json_encode(array("status" => FALSE));
+        } else {
+            echo json_encode(array("status" => TRUE));
+        }
+    }
+
+    public function isLogin() {
+        $user = $this->session->userdata('user');
+        //var_dump($user);
+        if (!isset($user) || !$user) {
+            //var_dump(FALSE);
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
     public function register() {
         
     }
@@ -37,7 +59,7 @@ class Login extends CI_Controller {
             //redirect('login');
         } else {
             $this->session->set_userdata('user', $result);
-
+            $this->session->set_userdata('id_member', $result['id_member']);
             $loginStatus = array('status' => TRUE);
             if (intval($result['is_admin']) == 1) {
                 $loginStatus['role'] = 'admin';
@@ -88,8 +110,8 @@ class Login extends CI_Controller {
             $this->session->set_flashdata('info', 'Data Sukses di Simpan');
         }
         echo json_encode(array('title' => 'Sukses!', 'message' => 'Pendaftaran berhasil! Silahkan login untuk melanjutkan!'));
-        
-        
+
+
         //redirect('ui_home');
     }
 

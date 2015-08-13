@@ -30,8 +30,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!-- start menu -->
         <link href="<?php echo base_url(); ?>assets_user/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="<?php echo base_url(); ?>assets_user/js/megamenu.js"></script>
-        <script>$(document).ready(function() {
+        <script>
+            $(document).ready(function() {
                 $(".megamenu").megamenu();
+            
+                function getid(id){
+                    var tmp = id.split("-");
+                
+                    return tmp[1];
+                }
+            
+                var inputJumlah = $(".number-input");
+                //alert(inputJumlah.length);
+                for(var i = 0; i < inputJumlah.length; i++ ){
+                    inputJumlah[i].addEventListener("input", function(e){
+                        var id = getid(e.target.id);
+                        hitungharga(id);
+                    }, false);
+        
+                    inputJumlah[i].addEventListener("keyup", function(e){
+                        console.info("keyup " + e.target.id);
+                        var id = getid(e.target.id);
+                        hitungharga(id);
+                    }, false);
+        
+                    inputJumlah[i].addEventListener("change", function(e){
+                        console.info("change " + e.target.id);
+                        var id = getid(e.target.id);
+                        hitungharga(id);
+                    }, false);
+                }
+            
             });</script>
         <script src="<?php echo base_url(); ?>js/accounting.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets_user/js/menu_jquery.js"></script>
@@ -69,6 +98,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     }
                 });
             }
+        
+            function checkout1(){
+                $.ajax({
+                    type: "post",
+                    url: "<?php echo base_url() ?>index.php/login/getLoginStatus",
+                    success: function(result){
+                        var json = JSON.parse(result);
+                        //alert("Status: " + JSON.stringify(json.status));
+                        if(json.status){
+                            //document.location.href = "<?php echo base_url() ?>index.php/ui_product/checkout";
+                            $("#form_jumlah").submit();
+                        } else{
+                            alert("Silahkan login untuk melanjutkan!");
+                        }
+                    },
+                    error: function(err){
+                        alert(err);
+                    }
+                });
+            }
 
             function doRegister() {
                 var e = $("#email1").val();
@@ -96,12 +145,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             function doLogout() {
                 document.location.href = "<?php echo base_url(); ?>index.php/login/getLogout";
             }
+<<<<<<< HEAD
 
             function addCartItem() {
                 $("#myProductModal").toggle();
                 $("#notifModal").modal();
             }
 
+=======
+        
+>>>>>>> d4c7fea3f1e54a339c9a1b772b66d647b69f1954
         </script>
         <!-- header_top -->
         <div class="top_bg">
@@ -270,7 +323,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                     <?php $this->load->view('home-user/ui-cart'); ?>
                                                 </div>
                                                 <div class="modal-footer footer">
-                                                    <button type="button" class="btn btn-success" onclick=""><i class="fa fa-thumbs-up fa-fw fa-lg"></i> Check Out</button>  
+                                                    <button type="button" class="btn btn-success" onclick="checkout1()"><i class="fa fa-thumbs-up fa-fw fa-lg"></i> Check Out</button>  
                                                 </div>
                                             </div>
                                         </div>
@@ -297,51 +350,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <section class="content">
             <?php $this->load->view($content); ?>
         </section><!-- /.content -->
+        <div class="foot-top">
+            <div class="container">
+                <div class="col-md-6 s-c">
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="col-md-6 s-c">
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
         <div class="footer">
             <div class="container">
-                <div class="col-md-3 cust">
-                    <h4>CUSTOMER CARE</h4>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="buy.html">How To Buy</a></li>
-                    <li><a href="#">Delivery</a></li>
-                </div>
-                <div class="col-md-2 abt">
-                    <h4>ABOUT US</h4>
-                    <li><a href="#">Our Stories</a></li>
-                    <li><a href="#">Press</a></li>
-                    <li><a href="#">Career</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </div>
                 <div class="col-md-2 myac">
                     <h4>MY ACCOUNT</h4>
                     <li><a href="register.html">Register</a></li>
                     <li><a href="#">My Cart</a></li>
-                    <li><a href="#">Order History</a></li>
-                    <li><a href="buy.html">Payment</a></li>
                 </div>
                 <div class="col-md-5 our-st">
-                    <div class="our-left">
-                        <h4>OUR STORES</h4>
-                    </div>
-                    <div class="our-left1">
-                        <div class="cr_btn">
-                            <a href="#">SOLO</a>
-                        </div>
-                    </div>
                     <div class="our-left1">
                         <div class="cr_btn1">
-                            <a href="#">BOGOR</a>
+                            <a href="#">Bojonegoro</a>
                         </div>
                     </div>
                     <div class="clearfix"> </div>
-                    <li><i class="add"> </i>Jl. Haji Muhidin, Blok G no.69</li>
-                    <li><i class="phone"> </i>025-2839341</li>
-                    <li><a href="mailto:info@example.com"><i class="mail"> </i>info@sitename.com </a></li>
+                    <li><i class="add"> </i>Jl. Bojoneoro, Blok G no.69</li>
+                    <li><i class="phone"> </i>085732899137</li>
+                    <li><a href="mailto:info@example.com"><i class="mail"> </i>jauharfirdaus78@mail.com</a></li>
 
                 </div>
                 <div class="clearfix"> </div>
-                <p>Copyrights © 2015 Gretong. All rights reserved | Template by <a href="http://w3layouts.com/">W3layouts</a></p>
+                <p>Copyrights © 2015 TokoSoftware.com. All rights reserved | Template by <a href="http://w3layouts.com/">W3layouts</a></p>
             </div>
         </div>
     </body>

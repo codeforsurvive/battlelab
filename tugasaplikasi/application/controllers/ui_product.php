@@ -91,34 +91,35 @@ class Ui_product extends CI_Controller {
         $data['module'] = $this->input->post('id_module');
         $data['module_detail'] = $this->model_paket->getViewPaket($data['paket']['id_paket'], $data['product']['id_product'])->result_array();
         $data['member'] = $user['id_member'];
-        $data['harga'] = $this->input->post('harga_aplikasi');
+        $data['harga'] = $this->input->post('harga_tampilan');
         $data['jumlah'] = 1;
+        $data['subtotal'] = intval($data['harga']) * intval($data['jumlah']);
         //print_r($data);
         //die();
         //$this->session->set_userdata('cart_item', array());
         if (!$this->session->userdata('cart_item')) {
             $cart = array();
             //array_push($cart, $data);
-            $cart[$data['product']['product_id'] . "_" . $data['paket']['paket_id']] = $data;
+            $cart[$data['product']['id_product'] . "_" . $data['paket']['id_paket']] = $data;
             $this->session->set_userdata('cart_item', $cart);
         } else {
             $cart = $this->session->userdata('cart_item');
             //array_push($cart, $data);
-            $cart[$data['product']['product_id'] . "_" . $data['paket']['paket_id']] = $data;
+            $cart[$data['product']['id_product'] . "_" . $data['paket']['id_paket']] = $data;
             $this->session->set_userdata('cart_item', $cart);
         }
         $cart = $this->session->userdata('cart_item');
-        
+        redirect('ui_product');
         return $cart;
     }
-    
-    public function  getcart(){
+
+    public function getcart() {
         $cart = $this->session->userdata('cart_item');
-        
+
         echo json_encode($cart);
     }
-    
-    public function addchart(){
+
+    public function addchart() {
         $this->addproduct();
         $this->getcart();
     }
@@ -127,9 +128,9 @@ class Ui_product extends CI_Controller {
         $index = $this->input->post('index');
         $cart = $this->session->userdata('cart_item');
         array_splice($cart, $index, 1);
-        
+
         $this->session->set_userdata('cart_item', $cart);
-        
+
         $this->getcart();
     }
 
@@ -226,6 +227,63 @@ class Ui_product extends CI_Controller {
         $isi['login'] = $this->isi['login'];
         $isi['userLogin'] = $this->isi['userLogin'];
         $this->load->view('halaman_user', $isi);
+    }
+
+    public function laporan() {
+        $this->load - view('laporan');
+    }
+
+    public function checkout() {
+
+        /*
+          if (!$this->isLogin()) {
+          redirect('halaman_user');
+          } */
+        $cart = $this->session->userdata('cart_item');
+        $i = 0;
+        $jumlah = $this->input->post('jumlah');
+        //var_dump($jumlah);
+        //die();
+        foreach ($cart as $key => $d):
+            $data['source'] = $d['source'];
+            $data['flag_active'] = 1;
+            $data['tanggal_pemesanan'] = date("Y-m-d");
+            $data['jumlah'] = intval($jumlah[$i++]);
+            $data['id_member'] = $this->session->userdata('id_member');
+            $data['harga_aplikasi'] = $d['harga'];
+            $id_module = array();
+            $module_detail = $d['module_detail'];
+            foreach ($module_detail as $dd) {
+                array_push($id_module, $dd['id_module']);
+            }
+            $this->load->model('model_pembelian');
+            //print_r($data);
+
+            //die();
+            $last_id = $this->model_pembelian->getInsert($data);
+            if (sizeof($id_module) > 0) {
+                $temp = array();
+                for ($i = 0; $i < sizeof($id_module); $i++) {
+                    $detail = array(
+                        'id_member' => $this->session->userdata('id_member'),
+                        'id_product' => $d['product']['id_product'],
+                        'id_module' => $id_module[$i],
+                        'id_pembelian' => $last_id,
+                        'id_paket' => $d['paket']['id_paket'],
+                        'id_template' => $d['template']
+                    );
+                    array_push($temp, $detail);
+                    
+                    $this->model_detail_pembelian->getInsert($detail);
+                }
+                
+                //print_r($temp);
+                //die();
+            }
+        endforeach;
+        
+        $this->session->set_userdata('cart_item', array());
+        redirect('ui_product/index');
     }
 
 }

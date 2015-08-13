@@ -28,7 +28,7 @@
                         <h4 class="modal-title" id="myProductModalLabel">Pembelian</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="<?php echo base_url(); ?>index.php/ui_product/addproduct" method="post" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="nama_paket">Pilih Paket</label>
@@ -59,16 +59,22 @@
                                 <div class="clearfix"></div>
                                 <div class="form-group">
                                     <label for="harga_aplikasi">Harga Aplikasi</label>
-                                    <input type="text" class="form-control" id="harga_tampilan" value=""  readonly />
+                                    <input type="text" class="form-control" id="harga_tampilan" value="" name="harga_tampilan" readonly />
                                     <!--<textarea type="text" class="form-control" name="harga_aplikasi" id="harga_aplikas" placeholder="Harga Aplikasi"  required></textarea> -->
                                     <input type="hidden" name="harga_aplikasi" id="harga_aplikasi" value="" />
                                 </div>
                             </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-default"> Tambahkan Ke Cart</button>
                         </form>
                     </div>
                     <div class="modal-footer">
+<<<<<<< HEAD
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary"onclick="addCartItem()"><i class="fa fa-fw fa-lg fa-cart-plus"></i> Tambahkan Ke Cart</button>
+=======
+
+>>>>>>> d4c7fea3f1e54a339c9a1b772b66d647b69f1954
                     </div>
                 </div>
             </div>
