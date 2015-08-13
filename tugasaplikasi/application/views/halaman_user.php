@@ -96,6 +96,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             function doLogout() {
                 document.location.href = "<?php echo base_url(); ?>index.php/login/getLogout";
             }
+
+            function addCartItem() {
+                $("#myProductModal").toggle();
+                $("#notifModal").modal();
+            }
+
         </script>
         <!-- header_top -->
         <div class="top_bg">
@@ -238,10 +244,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                     <!-- Modal Notif -->
                                     <div class="modal fade" id="notifModal" tabindex="-1" role="dialog" aria-labelledby="myNotifLabel">
                                         <div class="container container-fluid">
-                                            <div class="modal-body">
-                                                <div class="alert alert-warning alert-dismissible" role="alert">
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title header" id="myNotifLabel">Notifikasi</h4>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <div class="alert alert-warning alert-dismissible" role="alert">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <strong>Warning!</strong> Better check yourself, you're not looking too good.
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
