@@ -48,13 +48,13 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'db4free.net';
+$db['default']['hostname'] = 'localhost';
 //$db['default']['hostname'] = '192.168.0.108';
-$db['default']['username'] = 'siantartoppro';
-$db['default']['password'] = 'project1234';
+$db['default']['username'] = 'root';
+$db['default']['password'] = '';
 
-//$db['default']['database'] = 'kztszete_pm';
-$db['default']['database'] = 'projectman1206';
+$db['default']['database'] = 'kztszete_pm';
+//$db['default']['database'] = 'projectman1206';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
